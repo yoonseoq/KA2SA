@@ -1,4 +1,4 @@
-package com.green.ka2sa.common.model;
+package com.green.ca2sa.common.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;

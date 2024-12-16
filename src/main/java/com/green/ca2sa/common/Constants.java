@@ -1,4 +1,4 @@
-package com.green.ka2sa.common;
+package com.green.ca2sa.common;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

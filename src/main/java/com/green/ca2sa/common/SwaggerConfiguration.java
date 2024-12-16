@@ -1,4 +1,4 @@
-package com.green.ka2sa.common;
+package com.green.ca2sa.common;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;

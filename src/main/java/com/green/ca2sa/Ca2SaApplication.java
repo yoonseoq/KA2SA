@@ -1,13 +1,13 @@
-package com.green.ka2sa;
+package com.green.ca2sa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Ka2SaApplication {
+public class Ca2SaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Ka2SaApplication.class, args);
+        SpringApplication.run(Ca2SaApplication.class, args);
     }
 
 }
