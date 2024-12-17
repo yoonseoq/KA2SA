@@ -5,9 +5,9 @@ import io.swagger.v3.oas.annotations.info.Info;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "KA2SA",
+                title = "CA2SA",
                 version = "v1",
-                description = "KA2SA"
+                description = "CA2SA"
         )
 )
 public class SwaggerConfiguration {
