@@ -28,7 +28,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
     implementation 'org.springframework.boot:spring-boot-starter-mail:3.4.0'
-    implementation 'org.thymeleaf:thymeleaf'
     implementation 'org.apache.commons:commons-text:1.13.0'
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.7.0'
     implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4'

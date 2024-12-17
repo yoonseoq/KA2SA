@@ -16,7 +16,7 @@ public class EmailController {
     private final AuthCodeService authCodeService;
 
     @PostMapping("send-code")
-    public ResultResponse<Boolean> sendCode(@RequestBody EmailSendCodeReq p) {
+    public ResultResponse<Boolean> postSendCode(@RequestBody EmailSendCodeReq p) {
         String code = authCodeService.generateAuthCode(p);
         boolean result = emailService.sendCodeToEmail(p.getEmail(), "이메일 인증 코드", code);
         return ResultResponse.<Boolean>builder()
@@ -26,7 +26,7 @@ public class EmailController {
     }
 
     @PostMapping("verify-code")
-    public ResultResponse<Boolean> verifyCode(@RequestBody EmailVerifyCodeReq p) {
+    public ResultResponse<Boolean> postVerifyCode(@RequestBody EmailVerifyCodeReq p) {
         boolean result = authCodeService.validateAuthCode(p);
         return ResultResponse.<Boolean>builder()
                 .resultMessage(String.format("인증 %s", result ? "성공" : "실패"))
