@@ -1,5 +1,7 @@
 const:
   default-page-size: 20
+  auth-code-length: 6
+
 file:
   directory: D:/LJY/CA2SA/image
 
@@ -17,6 +19,17 @@ spring:
   servlet:
     multipart:
       max-file-size: 15MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 0ca2sa0@gmail.com
+    password: wotrvbcpartvbbmk
+    properties:
+      mail:
+        smtp:
+          auth: true  # SMTP 인증 사용
+          starttls:
+            enable: true
 
 springdoc:
   swagger-ui:
