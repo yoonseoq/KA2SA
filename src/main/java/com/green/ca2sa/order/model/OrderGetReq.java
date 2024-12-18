@@ -1,11 +1,27 @@
 package com.green.ca2sa.order.model;
 
+import com.green.ca2sa.common.model.Paging;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.web.bind.annotation.BindParam;
 
 @Getter
+@Setter
+@ToString(callSuper = true)
+public class OrderGetReq extends Paging {
+    @Schema(title = "고객 유저 PK",name = "signed_user_id",requiredMode = Schema.RequiredMode.REQUIRED)
+    private Long signedUserId;
+    @Schema(title = "카페 관리자 PK",name = "cafe_admin_id",requiredMode = Schema.RequiredMode.REQUIRED)
+    private Long cafeAdminId;
 
-public class OrderGetReq {
-
+    public OrderGetReq(Integer page, Integer size, @BindParam("signed_user_id")Long signedUserId
+                                                  , @BindParam("cafe_admin_id")Long cafeAdminId) {
+        super(page, size);
+        this.signedUserId = signedUserId;
+        this.cafeAdminId = cafeAdminId;
+    }
 }
 
 //orderId
