@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.ca2sa.cafe.CafeMapper">
+    <update id="updCafe">
+        update cafe
+        <set>
+            <if test="cafeName != null and cafeName != ''">
+                cafeName = #{cafeName}
+            </if>
+            <if test="location != null and location != ''">
+                ,location = #{location}
+            </if>
+            <if test="tel != null and tel != ''">
+                ,tel = #{tel}
+            </if>
+            <if test="cafePic != null and cafePic != ''">
+                ,cafePic = #{cafePic}
+            </if>
+            <if test="closeTime != null and closeTime != ''">
+                ,closeTime = #{closeTime}
+            </if>
+            <if test="openTime != null and openTime != ''">
+                ,openTime = #{openTime}
+            </if>
+        </set>
+        where cafeId = #{cafeId}
+    </update>
+
+    <update id="updCafeOrder">
+        update `order`
+        set orderProgress = #{orderProgress}
+        where orderId = #{orderId}
+    </update>
+
+    <select id="selCafe">
+        select cafeName, location, tel, cafePic, openTime, closeTime
+        from cafe
+        where cafeId = #{cafeId}
+    </select>
+    <select id="emailCheck">
+        select cafeId
+        from cafe
+        where email = #{email}
+    </select>
+</mapper>
