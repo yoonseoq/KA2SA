@@ -22,7 +22,7 @@ public class EmailController {
     @Operation(description = "이메일 인증 코드 발송")
     public ResultResponse<Boolean> postSendCode(@RequestBody EmailSendCodeReq p) {
         String code = authCodeService.generateAuthCode(p);
-        boolean result = emailService.sendCodeToEmail(p.getEmail(), "이메일 인증 코드", code);
+        boolean result = emailService.sendCodeToEmail(p.getEmail(), "CA2SA 이메일 인증 코드 안내", code);
         return ResultResponse.<Boolean>builder()
                 .resultMessage(String.format("전송 %s", result ? "성공" : "실패"))
                 .resultData(result)
