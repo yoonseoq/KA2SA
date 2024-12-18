@@ -3,10 +3,9 @@
 <mapper namespace="com.green.ca2sa.order.OrderMapper">
     <insert id="insOrder">
         insert into order
-            set orderId = #{orderId},
-                userId = #{userId},
+            set userId = #{userId},
                 cafeId = #{cafeId},
-                pickUpTime = #{pickUpTime}
+                pickUpTime = #{pickUpTime},
+                memo = #{memo}
     </insert>
-    <select id=""
 </mapper>
