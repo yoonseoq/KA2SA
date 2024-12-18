@@ -18,5 +18,5 @@ public class CafeSignUpReq {
     private String businessNumber;
     private int agree;
     @JsonIgnore
-    private String msg;
+    private long cafeId;
 }

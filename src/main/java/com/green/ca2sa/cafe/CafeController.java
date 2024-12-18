@@ -1,14 +1,13 @@
 package com.green.ca2sa.cafe;
 
-import com.green.ca2sa.cafe.model.CafeGetReq;
-import com.green.ca2sa.cafe.model.CafeGetRes;
-import com.green.ca2sa.cafe.model.CafeOrderPutReq;
-import com.green.ca2sa.cafe.model.CafePutReq;
+import com.green.ca2sa.cafe.model.*;
 import com.green.ca2sa.common.model.ResultResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,15 +18,32 @@ public class CafeController {
     private final CafeService cafeService;
 
 
-    @GetMapping
-    public ResultResponse<CafeGetRes> getCafe(CafeGetReq p) {
-        CafeGetRes res = cafeService.selCafe(p);
-        return ResultResponse.<CafeGetRes>builder()
+    @PostMapping("sign-up")
+    @Operation(summary = "카페 회원가입")
+    public ResultResponse<Integer> cafeSignUp(@RequestPart(required = false)MultipartFile pic,
+                                              @RequestPart CafeSignUpReq p) {
+        int res = cafeService.signUpCafe(pic,p);
+
+        return ResultResponse.<Integer>builder()
+                .resultMessage("회원가입 완료")
                 .resultData(res)
-                .resultMessage("조회")
                 .build();
     }
-    @PostMapping("sign-up/email")
+
+    @PostMapping("sign-in")
+    @Operation(summary = "카페관리 로그인")
+    public ResultResponse<CafeSignInRes> cafeSignIn(@RequestBody CafeSignInReq p){
+        CafeSignInRes res = cafeService.signInCafe(p);
+
+        log.info("p msg 확인용: {}",p);
+        return ResultResponse.<CafeSignInRes>builder()
+                .resultData(res)
+                .resultMessage(res.getMsg())
+                .build();
+    }
+
+    @PostMapping("email")
+    @Operation(summary = "카페 이메일 중복확인")
     public ResultResponse<Integer> checkEmail(String email) {
         int res = cafeService.signUpEmailCheck(email);
         return ResultResponse.<Integer>builder()
@@ -36,7 +52,18 @@ public class CafeController {
                 .build();
     }
 
+    @GetMapping
+    @Operation(summary = "카페 정보 조회")
+    public ResultResponse<CafeGetRes> getCafe(CafeGetReq p) {
+        CafeGetRes res = cafeService.selCafe(p);
+        return ResultResponse.<CafeGetRes>builder()
+                .resultData(res)
+                .resultMessage("조회")
+                .build();
+    }
+
     @PatchMapping
+    @Operation(summary = "카페 정보 수정")
     public ResultResponse<Integer> patchCafe(@RequestBody CafePutReq p){
         log.info("p 값 {}",p);
         int result = cafeService.updCafe(p);
@@ -47,10 +74,11 @@ public class CafeController {
     }
 
     @PatchMapping("/order")
+    @Operation(summary = "카페 주문상태 수정")
     public ResultResponse<Integer> patchCafeOrder(CafeOrderPutReq p){
         int result = cafeService.updCafeOrder(p);
         return ResultResponse.<Integer>builder()
-                .resultMessage("")
+                .resultMessage("변경 완료")
                 .resultData(result)
                 .build();
     }

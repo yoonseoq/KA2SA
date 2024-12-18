@@ -39,8 +39,21 @@
         from cafe
         where cafeId = #{cafeId}
     </select>
-    <select id="emailCheck">
-        select cafeId
+    <select id="cafeEmailCheck">
+        SELECT email
+        FROM cafe
+        WHERE email =#{email}
+    </select>
+    <insert id="insCafe" useGeneratedKeys="true" keyProperty="cafeId">
+        insert into cafe
+        set
+        cafeName = #{cafeName}, location = #{location}, tel = #{tel}, cafePic = #{cafePic},
+        closeTime = #{closeTime}, openTime = #{openTime}, email = #{email},
+        apw = #{apw}, businessNumber = #{businessNumber}, agree = #{agree}
+    </insert>
+
+    <select id="signInCafe">
+        select cafeId, apw, email
         from cafe
         where email = #{email}
     </select>
