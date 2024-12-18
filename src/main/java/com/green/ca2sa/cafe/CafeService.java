@@ -25,15 +25,16 @@ public class CafeService {
     }
 
     public int signUpCafe(CafeSignUpReq p){
-//        if(cafeMapper.emailCheck(p.getEmail())==null){
-//            p.setMsg("중복된 이메일 입니다.");
-//            return 0;
-//        } 쳐피 email 인증부터면 필요가 없는거아님?
-
         int res = cafeMapper.insCafe(p);
 
         //암호화
 
         return res;
+    }
+    public int signUpEmailCheck(String email){
+            if(cafeMapper.emailCheck(email)==null){
+                return 0;
+            }
+            return 1;
     }
 }

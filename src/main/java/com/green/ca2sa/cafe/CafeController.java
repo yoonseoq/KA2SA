@@ -27,6 +27,14 @@ public class CafeController {
                 .resultMessage("조회")
                 .build();
     }
+    @PostMapping("sign-up/email")
+    public ResultResponse<Integer> checkEmail(String email) {
+        int res = cafeService.signUpEmailCheck(email);
+        return ResultResponse.<Integer>builder()
+                .resultData(res)
+                .resultMessage(res == 0 ? "중복된 이메일입니다." : "이메일 확인 완료")
+                .build();
+    }
 
     @PatchMapping
     public ResultResponse<Integer> patchCafe(@RequestBody CafePutReq p){
