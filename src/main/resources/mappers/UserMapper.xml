@@ -5,7 +5,14 @@
 
 
 <mapper namespace="com.green.ca2sa.user.UserMapper">
-
+    <insert id="postUser">
+        INSERT INTO user
+        SET  email=#{email}
+            ,upw=#{upw}
+            ,nickName=#{nickName}
+            ,phone=#{phone}
+            ,agree=#{agree}
+    </insert>
 
 
 
