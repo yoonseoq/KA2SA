@@ -3,7 +3,7 @@ const:
   auth-code-length: 6
 
 file:
-  directory: D:/LJY/CA2SA/image
+  directory: C:\project\ca2sa\image
 
 mybatis:
   mapper-locations: mappers/**/*.xml
