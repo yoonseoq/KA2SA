@@ -13,6 +13,7 @@ public class OrderMenuPostReq {
     private long orderId;
     private long menuId;
     private int count;
+    private List<OrderMenuOptionPostReq> options;
 
     @JsonIgnore
     private long orderMenuId;
