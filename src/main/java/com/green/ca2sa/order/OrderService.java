@@ -14,10 +14,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderMapper orderMapper;
+    private final OrderMenuMapper orderMenuMapper;
 
     public int PostOrder(OrderPostReq p){
         int result = orderMapper.insOrder(p);
         return result;
+
+
+
+
+
+
     }
 
     public List<OrderGetRes> GetOrderList(OrderGetReq p){

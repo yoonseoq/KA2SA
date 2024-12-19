@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.green.ca2sa.order.orderMenu.OrderMenuMapper">
+<mapper namespace="com.green.ca2sa.order.OrderMenuMapper">
     <insert id="insOrderMenu">
         insert into `order_menu` (orderId, menuId, count)
         values (last_insert_id(), #{menuId}, #{count})

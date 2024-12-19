@@ -1,4 +1,4 @@
-package com.green.ca2sa.order.orderMenu;
+package com.green.ca2sa.order;
 
 import org.apache.ibatis.annotations.Mapper;
 
