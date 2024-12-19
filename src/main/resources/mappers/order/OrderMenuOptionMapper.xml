@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.ca2sa.order.orderMenu.OrderMenuOptionMapper">
     <insert id="insOrderMenuOption">
-        insert into order_menu_option (orderMenuId, menuOptionId)
+        insert into order_menu_option ( orderMenuId, menuOptionId)
+        values
         <foreach collection="p" item="item" separator=",">
-        values(#{orderMenuId}, #{item.menuOptionId})
+        ( #{orderMenuId},#{item.menuOptionId})
 
         </foreach>
     </insert>

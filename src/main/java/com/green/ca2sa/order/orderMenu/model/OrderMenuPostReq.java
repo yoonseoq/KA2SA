@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @ToString
 public class OrderMenuPostReq {
-
+@JsonIgnore
     private Long orderId;
     private long menuId;
     private int count;
