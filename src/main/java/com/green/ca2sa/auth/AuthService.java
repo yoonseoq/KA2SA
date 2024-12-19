@@ -1,6 +1,6 @@
-package com.green.ca2sa.email;
+package com.green.ca2sa.auth;
 
-import com.green.ca2sa.email.model.AuthCodeDto;
+import com.green.ca2sa.auth.model.AuthCodeDto;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class EmailService {
+public class AuthService {
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 

@@ -1,12 +1,12 @@
-package com.green.ca2sa.email;
+package com.green.ca2sa.auth;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.green.ca2sa.common.CodeGenerate;
 import com.green.ca2sa.common.Constants;
-import com.green.ca2sa.email.model.AuthCodeDto;
-import com.green.ca2sa.email.model.EmailSendCodeReq;
-import com.green.ca2sa.email.model.EmailVerifyCodeReq;
+import com.green.ca2sa.auth.model.AuthCodeDto;
+import com.green.ca2sa.auth.model.SendEmailAuthCodeReq;
+import com.green.ca2sa.auth.model.VerifyEmailAuthCodeReq;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -22,7 +22,7 @@ public class AuthCodeService {
         authCodeCache = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES).build();
     }
 
-    public AuthCodeDto generateAuthCode(EmailSendCodeReq p) {
+    public AuthCodeDto generateAuthCode(SendEmailAuthCodeReq p) {
         String code = CodeGenerate.generateCode(Constants.getAuth_code_length());
         authCodeCache.put(p.getEmail(), code);
         Date now = new Date();
@@ -30,7 +30,7 @@ public class AuthCodeService {
         return AuthCodeDto.builder().authCode(code).maxDate(time).build();
     }
 
-    public boolean validateAuthCode(EmailVerifyCodeReq p) {
+    public boolean validateAuthCode(VerifyEmailAuthCodeReq p) {
         boolean result = Objects.equals(authCodeCache.getIfPresent(p.getEmail()), p.getCode());
         if (result) {
             authCodeCache.invalidate(p.getEmail());
