@@ -8,18 +8,18 @@
                 pickUpTime = #{pickUpTime},
                 memo = #{memo}
     </insert>
-    <select id="selOrderList">
-        select a.orderId, b.nickName, c.cafeName, c.location, a.pickUpTime, a.createdAt
+    <select id="getOrderList">
+        select a.orderId, b.nickName, c.cafeName, c.location, a.pickUpTime, a.createdAt, a.memo
         from `order` a
         inner join `user` b
         on a.userId = b.userId
         inner join `cafe` c
         on c.cafeId = a.cafeId
         <if test="cafeAdminId != null">
-            where cafeId = #{cafeAdminId}
+            where a.cafeId = #{cafeAdminId}
         </if>
         <if test="signedUserId != null">
-            where userId = #{signedUserId}
+            where a.userId = #{signedUserId}
         </if>
         order by a.orderId desc
         limit #{startIdx}, #{size}
