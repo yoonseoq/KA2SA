@@ -1,6 +1,7 @@
 package com.green.ca2sa.email;
 
 import com.green.ca2sa.common.model.ResultResponse;
+import com.green.ca2sa.email.model.AuthCodeDto;
 import com.green.ca2sa.email.model.EmailSendCodeReq;
 import com.green.ca2sa.email.model.EmailVerifyCodeReq;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,8 +22,8 @@ public class EmailController {
     @PostMapping("send-code")
     @Operation(description = "이메일 인증 코드 발송")
     public ResultResponse<Boolean> postSendCode(@RequestBody EmailSendCodeReq p) {
-        String code = authCodeService.generateAuthCode(p);
-        boolean result = emailService.sendCodeToEmail(p.getEmail(), "CA2SA 이메일 인증 코드 안내", code);
+        AuthCodeDto authCodeDto = authCodeService.generateAuthCode(p);
+        boolean result = emailService.sendCodeToEmail(p.getEmail(), "CA2SA 이메일 인증 코드 안내", authCodeDto);
         return ResultResponse.<Boolean>builder()
                 .resultMessage(String.format("전송 %s", result ? "성공" : "실패"))
                 .resultData(result)

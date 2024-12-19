@@ -1,5 +1,6 @@
 package com.green.ca2sa.email;
 
+import com.green.ca2sa.email.model.AuthCodeDto;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -17,14 +21,14 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
-    public boolean sendCodeToEmail(String to, String subject, String code) {
+    public boolean sendCodeToEmail(String to, String subject, AuthCodeDto authCodeDto) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper;
         try {
             helper = new MimeMessageHelper(mimeMessage, true);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(getHtmlTemplate(code), true);
+            helper.setText(getHtmlTemplate(authCodeDto), true);
             javaMailSender.send(mimeMessage);
             return true;
         } catch (MessagingException e) {
@@ -33,9 +37,16 @@ public class EmailService {
         }
     }
 
-    private String getHtmlTemplate(String code) {
+    private String getHtmlTemplate(AuthCodeDto authCodeDto) {
+        return templateEngine.process("emailTemplate", getContext(authCodeDto));
+    }
+
+    private Context getContext(AuthCodeDto authCodeDto) {
+        Map<String, Object> dto = new HashMap<>(2);
+        dto.put("authCode", authCodeDto.getAuthCode());
+        dto.put("maxDate", authCodeDto.getMaxDate());
         Context context = new Context();
-        String template = templateEngine.process("emailTemplate", context);
-        return template.replace("${code}", code);
+        context.setVariables(dto);
+        return context;
     }
 }
