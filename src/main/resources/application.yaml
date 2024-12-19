@@ -34,7 +34,6 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML
-    cache: false
 
 springdoc:
   swagger-ui:
