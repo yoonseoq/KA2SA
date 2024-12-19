@@ -24,17 +24,19 @@ public class OrderService {
     private final OrderMenuOptionMapper orderMenuOptionMapper;
     @Transactional
     public int PostOrder(OrderPostReq p){
-        List<OrderMenuPostReq> menuList = new ArrayList<>(p.getMenuList().size());
-        List<OrderMenuOptionPostReq> optionList = new ArrayList<>();
+        log.info("OrderPostReq:{}", p);
+        int result = orderMapper.insOrder(p);
+        // xml에 foreach문 사용해서 올리기
+        List<OrderMenuPostReq> menuList = new ArrayList<>(p.getMenuList().size());// 옵션이랑 메뉴 모임
+        List<OrderMenuOptionPostReq> optionList = new ArrayList<>(); // 옵션 리스트
         for (OrderMenuPostReq item : p.getMenuList()) {
             item.setOrderId(p.getOrderId());
             menuList.add(item);
-            for (OrderMenuOptionPostReq option : item.getOptions()) {
-                option.setOrderMenuId(item.getOrderMenuId());
-                optionList.add(option);
+            for (OrderMenuOptionPostReq option : item.getOptions()) { // 옵션
+                option.setOrderMenuId(item.getOrderMenuId()); // 오더 메뉴아이디 받거 세팅하고
+                optionList.add(option); // 옵션을 추가한다
             }
         }
-        int result = orderMapper.insOrder(p);
         int result2 = orderMenuMapper.insOrderMenu(menuList);
         int result3 = orderMenuOptionMapper.insOrderMenuOption(optionList);
         return result;

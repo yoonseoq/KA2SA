@@ -16,9 +16,6 @@ public class OrderMenuService {
     private final OrderMenuMapper orderMenuMapper;
     private final OrderMenuOptionMapper orderMenuOptionMapper;
 
-    public int postOrderMenu(List<OrderMenuOptionPostReq> options, OrderMenuPostReq p) {
 
-
-    }
 
 }

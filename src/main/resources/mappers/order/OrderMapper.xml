@@ -7,6 +7,7 @@
                 cafeId = #{cafeId},
                 pickUpTime = #{pickUpTime},
                 memo = #{memo}
+
     </insert>
     <select id="getOrderList">
         select a.orderId, b.nickName, c.cafeName, c.location, a.pickUpTime, a.createdAt, a.memo

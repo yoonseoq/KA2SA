@@ -7,10 +7,7 @@ import com.green.ca2sa.order.model.OrderPostReq;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResultResponse<Integer> postOrder(OrderPostReq p) {
+    public ResultResponse<Integer> postOrder(@RequestBody OrderPostReq p) {
         int result = orderService.PostOrder(p);
         log.info("OrderController > postOrder > req: {}", p);
         return ResultResponse.<Integer>builder()

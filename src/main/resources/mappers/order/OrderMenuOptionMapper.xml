@@ -3,6 +3,9 @@
 <mapper namespace="com.green.ca2sa.order.orderMenu.OrderMenuOptionMapper">
     <insert id="insOrderMenuOption">
         insert into order_menu_option (orderMenuId, menuOptionId)
-        values(#{orderMenuId}, #{menuOptionId})
+        <foreach collection="p" item="item" separator=",">
+        values(#{orderMenuId}, #{item.menuOptionId})
+
+        </foreach>
     </insert>
 </mapper>
