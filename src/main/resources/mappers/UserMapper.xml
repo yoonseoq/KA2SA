@@ -5,7 +5,7 @@
 
 
 <mapper namespace="com.green.ca2sa.user.UserMapper">
-    <insert id="postUser">
+    <insert id="postUserSignUp">
         INSERT INTO user
         SET  email=#{email}
             ,upw=#{upw}
@@ -19,6 +19,33 @@
         FROM user
         WHERE email=#{email}
     </select>
+
+    <select id="postUserSingIn">
+        SELECT email,upw,userId,nickName
+        FROM user
+        WHERE email=#{email}
+    </select>
+
+    <select id="getUserInfo">
+        SELECT nickName,email,phone
+        FROM user
+        WHERE userId=#{userId}
+    </select>
+    
+    <update id="updateUserInfo">
+        UPDATE user
+        SET  email=#{email}
+            ,nickName=#{nickName}
+            ,upw=#{upw}
+            ,phone=#{phone}
+        WHERE userId=#{userId}
+    </update>
+
+    <delete id="deleteUserInfo">
+        DELETE
+        FROM user
+        WHERE userId=#{userId}
+    </delete>
 
 
 

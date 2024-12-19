@@ -6,8 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Schema(title="유저 회원가입 요청")
-public class UserSignUpReq {
+public class UserInfoPutReq {
+    @Schema(title = "유저 ID",example = "2",requiredMode = Schema.RequiredMode.REQUIRED)
+    private long userId;
     @Schema(title = "이메일",example = "yaho@gmail.com",requiredMode = Schema.RequiredMode.REQUIRED)
     private String email;
     @Schema(title = "비밀번호",example = "1111",requiredMode = Schema.RequiredMode.REQUIRED)
@@ -16,6 +17,4 @@ public class UserSignUpReq {
     private String nickName;
     @Schema(title = "휴대폰번호",example = "01012345678",requiredMode = Schema.RequiredMode.REQUIRED)
     private String phone;
-    @Schema(title = "약관동의",example = "1",requiredMode = Schema.RequiredMode.REQUIRED)
-    private int agree;
 }
