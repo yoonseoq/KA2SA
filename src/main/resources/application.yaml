@@ -3,7 +3,7 @@ const:
   auth-code-length: 6
 
 file:
-  directory: D:/LJY/CA2SA/image
+  directory: D:\Students\jang jin seong\download\greengram_ver3
 
 mybatis:
   mapper-locations: mappers/**/*.xml
