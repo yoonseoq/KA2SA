@@ -19,7 +19,7 @@ public class CafeController {
 
 
     @PostMapping("sign-up")
-    @Operation(summary = "카페 회원가입")
+    @Operation(summary = "카페 회원가입(postman으로 해야됨)")
     public ResultResponse<Integer> cafeSignUp(@RequestPart(required = false)MultipartFile pic,
                                               @RequestPart CafeSignUpReq p) {
         int res = cafeService.signUpCafe(pic,p);

@@ -11,9 +11,7 @@ public class CafeSignUpReq {
     private String cafeName;
     private String location;
     private String tel;
-    @Schema(defaultValue = "22:00:00")
     private String closeTime;
-    @Schema(defaultValue = "09:00:00")
     private String openTime;
     private String email;
     private String apw;
