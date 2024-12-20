@@ -2,13 +2,16 @@ package com.green.ca2sa.order.orderMenu.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
+
 
 @Getter
 @Setter
 public class OrderMenuGetRes {
-    private long orderMenuId;
+    private long orderId;
+    private long menuId;
     private String menuName;
+    private int price;
+    private int count;
+
 
 }

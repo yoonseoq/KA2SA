@@ -11,9 +11,10 @@
     </insert>
 
     <select id="selMenuOptionList">
-        select
-        from order_menu_option a
-        join menu_option
+        select group_concat(b.optionName)
+        from `order_menu_option` a
+        left join `menu_option` b
+        on
         where a.menuOptionId = #{menuOptionId}
     </select>
 </mapper>

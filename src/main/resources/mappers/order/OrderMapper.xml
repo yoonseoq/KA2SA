@@ -10,12 +10,22 @@
 
     </insert>
     <select id="getOrderList">
-        select a.orderId, b.nickName, c.cafeName, c.location, a.pickUpTime, a.createdAt, a.memo
+        select a.orderId, b.nickName, c.cafeName, c.location
+        , a.pickUpTime, a.createdAt, a.memo
+        , e.menuName, e.price, e.menuPic, g.optionName
         from `order` a
         inner join `user` b
         on a.userId = b.userId
         inner join `cafe` c
         on c.cafeId = a.cafeId
+        left join `order_menu` d
+        on a.orderId = d.orderId
+        left join `menu` e
+        on d.menuId = e.menuId
+        left join `order_menu_option` f
+        on d.orderMenuId = f.orderMenuId
+        left Join `menu_option` g
+        on f.menuOptionId = g.menuOptionId
         <if test="cafeAdminId != null">
             where a.cafeId = #{cafeAdminId}
         </if>

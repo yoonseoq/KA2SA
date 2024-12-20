@@ -8,4 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @ToString
 public class OrderMenuGetReq {
+    private long orderId;
+
 }

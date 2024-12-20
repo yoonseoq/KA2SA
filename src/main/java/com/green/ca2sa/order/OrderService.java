@@ -47,6 +47,9 @@ public class OrderService {
 
     public List<OrderGetRes> GetOrderList(OrderGetReq p){
         List<OrderGetRes> orderList = orderMapper.getOrderList(p);
+
+
+
         return orderList;
     }
 }
