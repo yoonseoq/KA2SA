@@ -29,12 +29,8 @@ public class OrderService {
         // xml에 foreach문 사용해서 올리기
         List<OrderMenuPostReq> menuList = p.getMenuList().stream()
                 .peek(item -> item.setOrderId(p.getOrderId()))
-                .toList();//new ArrayList<>(p.getMenuList().size());// 옵션이랑 메뉴 모임
-        List<OrderMenuOptionPostReq> optionList = new ArrayList<>(); // 옵션 리스트
-//        for (OrderMenuPostReq item : p.getMenuList()) {
-//            item.setOrderId(p.getOrderId());
-//            menuList.add(item);
-//        }
+                .toList();
+        List<OrderMenuOptionPostReq> optionList = new ArrayList<>();
 
         int result2 = orderMenuMapper.insOrderMenu(menuList);
         long orderMenuId = menuList.get(0).getOrderMenuId();
@@ -43,7 +39,7 @@ public class OrderService {
                 option.setOrderMenuId(orderMenuId); // 오더 메뉴아이디 받거 세팅하고
                 optionList.add(option); // 옵션을 추가한다
             }
-            orderMenuId++;
+            orderMenuId++;   //그리고 메뉴 추가
         }
         int result3 = orderMenuOptionMapper.insOrderMenuOption(optionList);
         return result;

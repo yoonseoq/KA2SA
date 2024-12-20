@@ -10,4 +10,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("order/menu")
 @Slf4j
 public class OrderMenuController { //주문내역 확인
+    private final OrderMenuService orderMenuService;
 }

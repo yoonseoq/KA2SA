@@ -23,7 +23,7 @@ public class OrderController {
         int result = orderService.PostOrder(p);
         log.info("OrderController > postOrder > req: {}", p);
         return ResultResponse.<Integer>builder()
-                .resultMessage("주문등록완료")
+                .resultMessage("주문 등록 완료")
                 .resultData(result)
                 .build();
     }
@@ -32,7 +32,7 @@ public class OrderController {
     public ResultResponse<List<OrderGetRes>> getOrderList(OrderGetReq p) {
         List<OrderGetRes> list = orderService.GetOrderList(p);
         return ResultResponse.<List<OrderGetRes>>builder()
-                .resultMessage("오더 조회 완료")
+                .resultMessage("주문 조회 완료")
                 .resultData(list)
                 .build();
     }
