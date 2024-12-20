@@ -6,6 +6,7 @@ import com.green.ca2sa.menu.model.MenuDetailGetReq;
 import com.green.ca2sa.menu.model.MenuDetailGetRes;
 import com.green.ca2sa.menu.model.MenuPostReq;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("menu")
+@Tag(name = "메뉴 관련")
 public class MenuController {
     private final MenuService service;
 
