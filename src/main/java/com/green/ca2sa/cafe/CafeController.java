@@ -45,8 +45,8 @@ public class CafeController {
 
     @PostMapping("email")
     @Operation(summary = "카페 이메일 중복확인")
-    public ResultResponse<Integer> checkEmail(@RequestBody String email) {
-        int res = cafeService.signUpEmailCheck(email);
+    public ResultResponse<Integer> checkEmail(@RequestBody CafeCheckEmailPostReq p) {
+        int res = cafeService.signUpEmailCheck(p);
         return ResultResponse.<Integer>builder()
                 .resultData(res)
                 .resultMessage(res == 0 ? "중복된 이메일입니다." : "이메일 확인 완료")
