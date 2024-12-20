@@ -20,7 +20,7 @@ public class CafeController {
 
 
     @PostMapping("sign-up")
-    @Operation(summary = "카페 회원가입")
+    @Operation(summary = "카페 회원가입(postman으로 해야됨)")
     public ResultResponse<Integer> cafeSignUp(@RequestPart(required = false)MultipartFile pic,
                                               @RequestPart CafeSignUpReq p) {
         int res = cafeService.signUpCafe(pic,p);
@@ -59,7 +59,7 @@ public class CafeController {
         CafeGetRes res = cafeService.selCafe(p);
         return ResultResponse.<CafeGetRes>builder()
                 .resultData(res)
-                .resultMessage("조회")
+                .resultMessage("카페 정보 조회 완료")
                 .build();
     }
     @GetMapping("sales")
@@ -80,7 +80,7 @@ public class CafeController {
         int result = cafeService.updCafe(p);
         return ResultResponse.<Integer>builder()
                 .resultData(result)
-                .resultMessage(result == 0 ? "수정 실패" : "수정 완료")
+                .resultMessage(result == 0 ? "카페정보 수정 실패" : "카페정보 수정 완료")
                 .build();
     }
 
