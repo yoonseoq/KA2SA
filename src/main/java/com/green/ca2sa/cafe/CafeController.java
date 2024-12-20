@@ -61,6 +61,16 @@ public class CafeController {
                 .resultMessage("조회")
                 .build();
     }
+    @GetMapping("sales")
+    @Operation(summary = "카페 판매액 조회")
+    public ResultResponse<CafeGetWeekRes> getCafeSales(CafeGetWeekReq p) {
+        CafeGetWeekRes res = cafeService.selCafeSales(p);
+        return ResultResponse.<CafeGetWeekRes>builder()
+                .resultData(res)
+                .resultMessage("조회 완료")
+                .build();
+    }
+
 
     @PatchMapping
     @Operation(summary = "카페 정보 수정")
