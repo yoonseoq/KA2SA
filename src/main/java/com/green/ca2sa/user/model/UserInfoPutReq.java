@@ -15,6 +15,5 @@ public class UserInfoPutReq {
     private String upw;
     @Schema(title = "닉네임",example = "홍길동")
     private String nickName;
-    @Schema(title = "휴대폰번호",example = "01012345678",requiredMode = Schema.RequiredMode.REQUIRED)
-    private String phone;
+
 }

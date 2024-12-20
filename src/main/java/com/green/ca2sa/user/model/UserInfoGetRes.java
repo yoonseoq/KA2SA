@@ -8,5 +8,4 @@ import lombok.Setter;
 public class UserInfoGetRes {
     private String nickName;
     private String email;
-    private String phone;
 }

@@ -10,7 +10,6 @@
         SET  email=#{email}
             ,upw=#{upw}
             ,nickName=#{nickName}
-            ,phone=#{phone}
             ,agree=#{agree}
     </insert>
 
@@ -27,7 +26,7 @@
     </select>
 
     <select id="getUserInfo">
-        SELECT nickName,email,phone
+        SELECT nickName,email
         FROM user
         WHERE userId=#{userId}
     </select>
@@ -37,7 +36,6 @@
         SET  email=#{email}
             ,nickName=#{nickName}
             ,upw=#{upw}
-            ,phone=#{phone}
         WHERE userId=#{userId}
     </update>
 
