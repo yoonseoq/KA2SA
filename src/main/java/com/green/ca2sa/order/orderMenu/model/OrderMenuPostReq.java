@@ -20,8 +20,5 @@ public class OrderMenuPostReq {
     @JsonIgnore
     private Long orderMenuId;
 
-    public OrderMenuPostReq() {
-        super();
-        orderId = 0L;
-    }
+
 }

@@ -5,7 +5,7 @@
         insert into order_menu_option ( orderMenuId, menuOptionId)
         values
         <foreach collection="p" item="item" separator=",">
-        ( #{orderMenuId},#{item.menuOptionId})
+        ( #{item.orderMenuId},#{item.menuOptionId})
 
         </foreach>
     </insert>
