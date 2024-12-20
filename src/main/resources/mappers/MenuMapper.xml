@@ -19,11 +19,14 @@
 
 
 
-
-
     <delete id = "deleteMenu">
         DELETE
         FROM menu
         WHERE menuId = #{menuId}
     </delete>
+
+
+
+
+
 </mapper>
