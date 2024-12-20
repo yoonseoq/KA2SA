@@ -6,7 +6,7 @@ file:
   directory: C:\project\ca2sa\image
 
 mybatis:
-  mapper-locations: mappers/**/*.xml
+  mapper-locations: mappers.menu/**/*.xml
 
 spring:
   application:
