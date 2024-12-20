@@ -1,7 +1,10 @@
 package com.green.ca2sa.menu;
 
 import com.green.ca2sa.common.MyFileUtils;
-import com.green.ca2sa.menu.model.*;
+import com.green.ca2sa.menu.model.MenuDelReq;
+import com.green.ca2sa.menu.model.MenuGetReq;
+import com.green.ca2sa.menu.model.MenuGetRes;
+import com.green.ca2sa.menu.model.MenuPostReq;
 import com.green.ca2sa.menu.option.MenuOptionMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,7 +44,7 @@ public class MenuService {
         List<MenuGetRes> menuGetResList = mapper.selMenuList(p);
 
 
-    return null;
+return null;
     }
 
 
@@ -62,13 +65,5 @@ public class MenuService {
         myFileUtils.deleteFolder(deletePath, true);
 
         return result;
-    }
-
-    @Transactional
-    public MenuDetailGetRes getMenuDetailInfo(MenuDetailGetReq p) {
-        MenuDetailGetRes res= mapper.getMenuDetailInfo(p);
-
-        return res;
-
     }
 }

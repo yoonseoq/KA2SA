@@ -6,7 +6,7 @@ file:
   directory: D:\pjh\GreenGramVer3\greengramver3
 
 mybatis:
-  mapper-locations: mappers/**/*.xml
+  mapper-locations: mappers.menu/**/*.xml
 
 spring:
   application:
