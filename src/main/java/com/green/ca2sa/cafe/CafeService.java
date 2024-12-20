@@ -83,6 +83,7 @@ public class CafeService {
         return 0;
     }
 
+    // 카페 판매액 조회
     public CafeGetWeekRes selCafeSales(CafeGetWeekReq p){
         List<CafeGetWeekDto> cafeGetWeekDtoList = cafeMapper.selSumPriceWeekOfDay(p);
         int weekSum = 0;
