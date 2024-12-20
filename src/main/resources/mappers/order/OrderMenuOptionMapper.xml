@@ -9,4 +9,11 @@
 
         </foreach>
     </insert>
+
+    <select id="selMenuOptionList">
+        select
+        from order_menu_option a
+        join menu_option
+        where a.menuOptionId = #{menuOptionId}
+    </select>
 </mapper>
