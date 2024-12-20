@@ -1,0 +1,14 @@
+package com.green.ca2sa.cafe.model;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class CafeOrderPutReq {
+    @Schema(title = "주문번호")
+    private long orderId;
+    @Schema(title = "주문상태 숫자로 0~4 0:주문확인, 1:준비중, 2:준비완료, 3: 수령완료, 4: 주문거절")
+    private int orderProgress;
+}
