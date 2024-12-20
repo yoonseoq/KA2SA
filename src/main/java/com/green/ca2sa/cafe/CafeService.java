@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -81,4 +82,17 @@ public class CafeService {
         }
         return 0;
     }
+
+    public CafeGetWeekRes selCafeSales(CafeGetWeekReq p){
+        List<CafeGetWeekDto> cafeGetWeekDtoList = cafeMapper.selSumPriceWeekOfDay(p);
+        int weekSum = 0;
+        for(CafeGetWeekDto c : cafeGetWeekDtoList){
+            weekSum += c.getDaySumPrice();
+        }
+        CafeGetWeekRes res = new CafeGetWeekRes();
+        res.setWeekSumPrice(weekSum);
+        res.setSelWeek(cafeGetWeekDtoList);
+        return res;
+    }
+
 }
