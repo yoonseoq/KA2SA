@@ -30,6 +30,10 @@ spring:
           auth: true  # SMTP 인증 사용
           starttls:
             enable: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
 
 springdoc:
   swagger-ui:
