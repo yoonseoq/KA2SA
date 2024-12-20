@@ -6,6 +6,7 @@ import com.green.ca2sa.auth.model.SendEmailAuthCodeReq;
 import com.green.ca2sa.auth.model.VerifyEmailAuthCodeReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class AuthController {
 
     @PostMapping("send-code")
     @Operation(description = "이메일 인증 코드 발송")
-    public ResultResponse<Boolean> postSendCode(@RequestBody SendEmailAuthCodeReq p) {
+    public ResultResponse<Boolean> postSendCode(@Valid @RequestBody SendEmailAuthCodeReq p) {
         AuthCodeDto authCodeDto = authCodeService.generateAuthCode(p);
         boolean result = authService.sendCodeToEmail(p.getEmail(), "CA2SA 이메일 인증 코드 안내", authCodeDto);
         return ResultResponse.<Boolean>builder()
@@ -32,7 +33,7 @@ public class AuthController {
 
     @PostMapping("verify-code")
     @Operation(description = "이메일 인증 코드 검사")
-    public ResultResponse<Boolean> postVerifyCode(@RequestBody VerifyEmailAuthCodeReq p) {
+    public ResultResponse<Boolean> postVerifyCode(@Valid @RequestBody VerifyEmailAuthCodeReq p) {
         boolean result = authCodeService.validateAuthCode(p);
         return ResultResponse.<Boolean>builder()
                 .resultMessage(String.format("인증 %s", result ? "성공" : "실패"))
