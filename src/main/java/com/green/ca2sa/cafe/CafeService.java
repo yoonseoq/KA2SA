@@ -76,8 +76,8 @@ public class CafeService {
     }
 
     // 카페 이메일 중복확인
-    public int signUpEmailCheck(String email){
-        if(cafeMapper.cafeEmailCheck(email)==null){
+    public int signUpEmailCheck(CafeCheckEmailPostReq p){
+        if(cafeMapper.cafeEmailCheck(p.getEmail())==null){
             return 1;
         }
         return 0;

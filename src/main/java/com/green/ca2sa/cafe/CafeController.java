@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,8 +45,8 @@ public class CafeController {
 
     @PostMapping("email")
     @Operation(summary = "카페 이메일 중복확인")
-    public ResultResponse<Integer> checkEmail(String email) {
-        int res = cafeService.signUpEmailCheck(email);
+    public ResultResponse<Integer> checkEmail(@RequestBody CafeCheckEmailPostReq p) {
+        int res = cafeService.signUpEmailCheck(p);
         return ResultResponse.<Integer>builder()
                 .resultData(res)
                 .resultMessage(res == 0 ? "중복된 이메일입니다." : "이메일 확인 완료")
@@ -54,7 +55,7 @@ public class CafeController {
 
     @GetMapping
     @Operation(summary = "카페 정보 조회")
-    public ResultResponse<CafeGetRes> getCafe(CafeGetReq p) {
+    public ResultResponse<CafeGetRes> getCafe(@ParameterObject @ModelAttribute CafeGetReq p) {
         CafeGetRes res = cafeService.selCafe(p);
         return ResultResponse.<CafeGetRes>builder()
                 .resultData(res)
@@ -63,7 +64,7 @@ public class CafeController {
     }
     @GetMapping("sales")
     @Operation(summary = "카페 판매액 조회")
-    public ResultResponse<CafeGetWeekRes> getCafeSales(CafeGetWeekReq p) {
+    public ResultResponse<CafeGetWeekRes> getCafeSales(@ParameterObject @ModelAttribute CafeGetWeekReq p) {
         CafeGetWeekRes res = cafeService.selCafeSales(p);
         return ResultResponse.<CafeGetWeekRes>builder()
                 .resultData(res)
