@@ -2,6 +2,8 @@ package com.green.ca2sa.menu;
 
 import com.green.ca2sa.common.model.ResultResponse;
 import com.green.ca2sa.menu.model.MenuDelReq;
+import com.green.ca2sa.menu.model.MenuDetailGetReq;
+import com.green.ca2sa.menu.model.MenuDetailGetRes;
 import com.green.ca2sa.menu.model.MenuPostReq;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -34,4 +36,15 @@ public class MenuController {
                              .resultData(result)
                              .build();
     }
+
+    @GetMapping("detail")
+    @Operation(summary = "Menu 상세 정보 불러오기")
+    public ResultResponse<MenuDetailGetRes> getMenuDetailInfo(@ParameterObject @ModelAttribute MenuDetailGetReq p) {
+        MenuDetailGetRes result = service.getMenuDetailInfo(p);
+        return ResultResponse.<MenuDetailGetRes>builder()
+                .resultMessage("메뉴 상세 정보 출력 완료")
+                .resultData(result)
+                .build();
+    }
+
 }
