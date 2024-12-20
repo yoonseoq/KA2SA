@@ -13,16 +13,10 @@ import java.util.List;
 @ToString
 public class OrderPostReq {
     @JsonIgnore
-    private Long orderId;
+    private long orderId;
     private String pickUpTime;
     private String memo;
     private long userId;
     private long cafeId;
     private List<OrderMenuPostReq> menuList;
-    // order에서 받아와야 되는 것
-
-
-
-
-
 }

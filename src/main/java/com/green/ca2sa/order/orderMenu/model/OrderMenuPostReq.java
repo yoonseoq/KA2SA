@@ -12,13 +12,12 @@ import java.util.List;
 @ToString
 public class OrderMenuPostReq {
 @JsonIgnore
-    private Long orderId;
+    private long orderId;
     private long menuId;
     private int count;
     private List<OrderMenuOptionPostReq> options;
 
     @JsonIgnore
-    private Long orderMenuId;
-
+    private long orderMenuId;
 
 }

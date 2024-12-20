@@ -10,8 +10,6 @@ import lombok.ToString;
 @ToString
 public class OrderMenuOptionPostReq {
     @JsonIgnore
-    private Long orderMenuId;
+    private long orderMenuId;
     private long menuOptionId;
-
-
 }
