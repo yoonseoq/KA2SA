@@ -5,8 +5,8 @@ import com.green.ca2sa.order.model.OrderGetRes;
 import com.green.ca2sa.order.model.OrderPostReq;
 import com.green.ca2sa.order.orderMenu.OrderMenuMapper;
 import com.green.ca2sa.order.orderMenu.OrderMenuOptionMapper;
-import com.green.ca2sa.order.orderMenu.model.OrderMenuGetDto;
-import com.green.ca2sa.order.orderMenu.model.OrderMenuOptionGetDto;
+import com.green.ca2sa.order.orderMenu.model.OrderMenuDto;
+import com.green.ca2sa.order.orderMenu.model.OrderMenuOptionDto;
 import com.green.ca2sa.order.orderMenu.model.OrderMenuOptionPostReq;
 import com.green.ca2sa.order.orderMenu.model.OrderMenuPostReq;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -24,8 +23,9 @@ public class OrderService {
     private final OrderMapper orderMapper;
     private final OrderMenuMapper orderMenuMapper;
     private final OrderMenuOptionMapper orderMenuOptionMapper;
+
     @Transactional
-    public int PostOrder(OrderPostReq p){
+    public int PostOrder(OrderPostReq p) {
         log.info("OrderPostReq:{}", p);
         int result = orderMapper.insOrder(p);
         // xml에 foreach문 사용해서 올리기
@@ -50,30 +50,56 @@ public class OrderService {
         return result;
     }
 
-    public List<OrderGetRes> GetOrderList(OrderGetReq p){
-        List<OrderGetRes> orderList = orderMapper.getOrderList(p);
-
-        List<Long> orderIds = new ArrayList<>(orderList.size());
+    public List<OrderGetRes> GetOrderList(OrderGetReq p) {
+        log.info("OrderGetReq:{}", p);
+        List<OrderGetRes> orderList = orderMapper.getOrderList(p); // 일단 주문목록 조회
+        Map<Long, OrderGetRes> orderMap = new LinkedHashMap<>();
         for (OrderGetRes order : orderList) {
-            orderIds.add(order.getOrderId());
+            OrderGetRes orderDto = orderMap.computeIfAbsent(order.getOrderId(), key -> {
+                OrderGetRes newOrder = new OrderGetRes();
+                newOrder.setOrderId(order.getOrderId());
+                newOrder.setUserId(order.getUserId());
+                newOrder.setCafeId(order.getCafeId());
+                newOrder.setLocation(order.getLocation());
+                newOrder.setPickUpTime(order.getPickUpTime());
+                newOrder.setOrderMenuList(new ArrayList<>()); // 초기화
+                return newOrder;
+            });
 
-            List<OrderMenuGetDto> orderMenuList = orderMapper.getOrderMenu(order.getOrderId());
-            List<Long> orderMenuIds = new ArrayList<>(orderMenuList.size());
-            for (OrderMenuGetDto orderMenu : orderMenuList) {
-                orderMenuIds.add(orderMenu.getOrderMenuId());
+            if (order.getOrderMenuList() != null && order.getOrderMenuList().size() > 0) {
+                for (OrderMenuDto orderMenu : order.getOrderMenuList()) {
+                    OrderMenuDto menuDto = orderDto.getOrderMenuList().stream()
+                            .filter(m -> m.getOrderMenuId() == orderMenu.getOrderMenuId())
+                            .findFirst().orElseGet(() -> {
+                                OrderMenuDto newMenu = new OrderMenuDto();
+                                newMenu.setOrderMenuId(orderMenu.getOrderMenuId());
+                                newMenu.setMenuName(orderMenu.getMenuName());
+                                newMenu.setPrice(orderMenu.getPrice());
+                                newMenu.setOrderMenuOptions(new ArrayList<>());
+                                orderDto.getOrderMenuList().add(newMenu);
+                                return newMenu;
+                            });
 
-                List<OrderMenuOptionGetDto> menuOptionList = orderMapper.selOrderMenuOption(orderMenu.getOrderMenuId());
-                List<Long> menuOptionIds = new ArrayList<>(menuOptionList.size());
-                for (OrderMenuOptionGetDto menuOption : menuOptionList) {
-                    menuOptionIds.add(menuOption.getOrderMenuId());
+                    if (menuDto.getOrderMenuOptions() != null) {
+                        for (OrderMenuOptionDto optionDto : menuDto.getOrderMenuOptions()) {
+                            if (menuDto.getOrderMenuOptions().stream()
+                                    .noneMatch(o -> o.getMenuOptionId()
+                                            == optionDto.getMenuOptionId())) {
+                                menuDto.getOrderMenuOptions().add(optionDto);
+                            }
+                        }
+                    }
+
+
                 }
             }
         }
-        log.info("orderIds:{}", orderIds);
-
-
-        return orderList;
+        return new ArrayList<>(orderMap.values());
     }
+
+
+
+/*
     public List<OrderGetRes> GetOrderList2(OrderGetReq p) {
         // 1. 주문 리스트 조회
         List<OrderGetRes> orderList = orderMapper.getOrderList(p);
@@ -82,9 +108,9 @@ public class OrderService {
             long orderId = order.getOrderId();
 
             // 2. 주문별 메뉴 리스트 조회
-            List<OrderMenuGetDto> orderMenuList = orderMapper.getOrderMenu(orderId);
+            List<OrderMenuDto> orderMenuList = orderMapper.getOrderMenu(orderId);
 
-            for (OrderMenuGetDto orderMenu : orderMenuList) {
+            for (OrderMenuDto orderMenu : orderMenuList) {
                 long orderMenuId = orderMenu.getOrderMenuId();
 
                 // 3. 메뉴별 옵션 리스트 조회
@@ -105,4 +131,6 @@ public class OrderService {
         return orderList;
     }
 
+
+ */
 }

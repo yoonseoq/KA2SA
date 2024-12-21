@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-public class OrderMenuOptionGetDto {
+public class OrderMenuOptionDto {
     private long orderMenuId;
-    private long menuOptionId;
+    private Long menuOptionId;
     private String optionName;
     private int addPrice;
     private int required;

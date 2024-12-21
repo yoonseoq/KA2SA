@@ -16,7 +16,6 @@ public class OrderGetReq extends Paging {
     @Schema(title = "카페 관리자 PK",name = "cafe_admin_id",requiredMode = Schema.RequiredMode.REQUIRED)
     private Long cafeAdminId;
 
-    private long orderId;
 
     public OrderGetReq(Integer page, Integer size, @BindParam("signed_user_id")Long signedUserId
                                                   , @BindParam("cafe_admin_id")Long cafeAdminId) {
