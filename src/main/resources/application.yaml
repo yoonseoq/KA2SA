@@ -3,7 +3,7 @@ const:
   auth-code-length: 6
 
 file:
-  directory: D:\pjh\GreenGramVer3\greengramver3
+  directory: D:\pjh\CA2SA\image
 
 mybatis:
   mapper-locations: mappers/**/*.xml

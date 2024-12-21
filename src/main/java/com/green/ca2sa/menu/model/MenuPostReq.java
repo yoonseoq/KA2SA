@@ -19,6 +19,6 @@ public class MenuPostReq {
     private long price;
     @Schema(title = "메뉴 설명", example = "진하고 고소한 커피")
     private String comment;
-    @Schema(title = "메뉴 사진")
+    @JsonIgnore
     private String menuPic;
 }

@@ -10,5 +10,5 @@ public interface MenuMapper {
     int insMenu(MenuPostReq p);
     List<MenuGetRes> selMenuList(MenuGetReq p);
     int deleteMenu(MenuDelReq p);
-    MenuDetailGetRes getMenuDetailInfo(MenuDetailGetReq p);
+    List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p);
 }
