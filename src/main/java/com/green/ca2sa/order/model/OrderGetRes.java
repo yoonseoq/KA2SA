@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 public class OrderGetRes {
     private long orderId;
-    private long userId;
-    private long cafeId;
+    private String nickName;
+    private long cafeName;
     private String location;
     private String pickUpTime;
     private String createdAt;

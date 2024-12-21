@@ -58,8 +58,8 @@ public class OrderService {
             OrderGetRes orderDto = orderMap.computeIfAbsent(order.getOrderId(), key -> {
                 OrderGetRes newOrder = new OrderGetRes();
                 newOrder.setOrderId(order.getOrderId());
-                newOrder.setUserId(order.getUserId());
-                newOrder.setCafeId(order.getCafeId());
+                newOrder.setNickName(order.getNickName());
+                newOrder.setCafeName(order.getCafeName());
                 newOrder.setLocation(order.getLocation());
                 newOrder.setPickUpTime(order.getPickUpTime());
                 newOrder.setOrderMenuList(new ArrayList<>()); // 초기화

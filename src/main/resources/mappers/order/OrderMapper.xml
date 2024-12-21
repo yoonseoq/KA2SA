@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.ca2sa.order.OrderMapper">
+    <resultMap id="OrderResultMap" type="OrderGetRes">
+        <!-- OrderGetRes 매핑 -->
+        <id property="orderId" column="orderId" />
+        <result property="nickName" column="nickName" />
+        <result property="cafeName" column="cafeName" />
+        <result property="location" column="location" />
+        <result property="pickUpTime" column="pickUpTime" />
+        <result property="createdAt" column="createdAt" />
+
+        <!-- OrderMenuDto 리스트 매핑 -->
+        <collection property="orderMenuList" ofType="OrderMenuDto">
+            <id property="orderMenuId" column="orderMenuId" />
+            <result property="menuName" column="menuName" />
+            <result property="price" column="price" />
+
+            <!-- OrderMenuOptionDto 리스트 매핑 -->
+            <collection property="orderMenuOptions" ofType="OrderMenuOptionDto">
+                <id property="menuOptionId" column="menuOptionId" />
+                <result property="optionName" column="optionName" />
+                <result property="addPrice" column="addPrice" />
+            </collection>
+        </collection>
+    </resultMap>
+
     <insert id="insOrder" useGeneratedKeys="true" keyProperty="orderId">
         insert into `order`
             set userId = #{userId},
@@ -13,19 +37,14 @@
         select a.orderId, b.nickName, c.cafeName, c.location
         , a.pickUpTime, a.createdAt, a.memo
         , e.menuName, e.price, e.menuPic, g.optionName
+        , g.addPrice
         from `order` a
-        inner join `user` b
-        on a.userId = b.userId
-        inner join `cafe` c
-        on c.cafeId = a.cafeId
-        left join `order_menu` d
-        on a.orderId = d.orderId
-        left join `menu` e
-        on d.menuId = e.menuId
-        left join `order_menu_option` f
-        on d.orderMenuId = f.orderMenuId
-        left Join `menu_option` g
-        on f.menuOptionId = g.menuOptionId
+        inner join `user` b on a.userId = b.userId
+        inner join `cafe` c on c.cafeId = a.cafeId
+        left join `order_menu` d on a.orderId = d.orderId
+        left join `menu` e on d.menuId = e.menuId
+        left join `order_menu_option` f on d.orderMenuId = f.orderMenuId
+        left Join `menu_option` g on f.menuOptionId = g.menuOptionId
         <if test="cafeAdminId != null">
             where a.cafeId = #{cafeAdminId}
         </if>
