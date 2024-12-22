@@ -53,6 +53,8 @@ public class OrderService {
     public List<OrderGetRes> GetOrderList(OrderGetReq p) {
         log.info("OrderGetReq:{}", p);
         List<OrderGetRes> orderList = orderMapper.getOrderList(p); // 일단 주문목록 조회
+        log.info("order list from mapper : {}", orderList);
+
         Map<Long, OrderGetRes> orderMap = new LinkedHashMap<>();
         for (OrderGetRes order : orderList) {
             OrderGetRes orderDto = orderMap.computeIfAbsent(order.getOrderId(), key -> {
@@ -62,11 +64,13 @@ public class OrderService {
                 newOrder.setCafeName(order.getCafeName());
                 newOrder.setLocation(order.getLocation());
                 newOrder.setPickUpTime(order.getPickUpTime());
+                newOrder.setMemo(order.getMemo());
+                newOrder.setCreatedAt(order.getCreatedAt());
                 newOrder.setOrderMenuList(new ArrayList<>()); // 초기화
                 return newOrder;
             });
 
-            if (order.getOrderMenuList() != null && order.getOrderMenuList().size() > 0) {
+            if (order.getOrderMenuList() != null) {
                 for (OrderMenuDto orderMenu : order.getOrderMenuList()) {
                     OrderMenuDto menuDto = orderDto.getOrderMenuList().stream()
                             .filter(m -> m.getOrderMenuId() == orderMenu.getOrderMenuId())
@@ -80,57 +84,29 @@ public class OrderService {
                                 return newMenu;
                             });
 
-                    if (menuDto.getOrderMenuOptions() != null) {
-                        for (OrderMenuOptionDto optionDto : menuDto.getOrderMenuOptions()) {
-                            if (menuDto.getOrderMenuOptions().stream()
-                                    .noneMatch(o -> o.getMenuOptionId()
-                                            == optionDto.getMenuOptionId())) {
-                                menuDto.getOrderMenuOptions().add(optionDto);
+                    if (orderMenu.getOrderMenuOptions() != null) {
+                        for (OrderMenuOptionDto optionDto : orderMenu.getOrderMenuOptions()) {
+                            // 중복된 옵션이 없을 경우에만 추가
+                            boolean exists = menuDto.getOrderMenuOptions().stream()
+                                    .anyMatch(o -> o.getMenuOptionId() == optionDto.getMenuOptionId());
+                            if (!exists) {
+                                OrderMenuOptionDto options = new OrderMenuOptionDto();
+                                options.setMenuOptionId(optionDto.getMenuOptionId());
+                                options.setOptionName(optionDto.getOptionName());
+                                options.setAddPrice(optionDto.getAddPrice());
+                                options.setRequired(optionDto.getRequired());
+                                menuDto.getOrderMenuOptions().add(options);
                             }
                         }
                     }
-
-
                 }
             }
         }
+
         return new ArrayList<>(orderMap.values());
     }
-
-
-
-/*
-    public List<OrderGetRes> GetOrderList2(OrderGetReq p) {
-        // 1. 주문 리스트 조회
-        List<OrderGetRes> orderList = orderMapper.getOrderList(p);
-
-        for (OrderGetRes order : orderList) {
-            long orderId = order.getOrderId();
-
-            // 2. 주문별 메뉴 리스트 조회
-            List<OrderMenuDto> orderMenuList = orderMapper.getOrderMenu(orderId);
-
-            for (OrderMenuDto orderMenu : orderMenuList) {
-                long orderMenuId = orderMenu.getOrderMenuId();
-
-                // 3. 메뉴별 옵션 리스트 조회
-                List<OrderMenuOptionGetDto> menuOptionList = orderMapper.selOrderMenuOption(orderMenuId);
-
-                // 4. 옵션 리스트를 메뉴에 설정
-                orderMenu.setOptionList(menuOptionList);
-            }
-
-            // 5. 메뉴 리스트를 주문에 설정
-            order.setMenuList(orderMenuList);
-        }
-
-        // 6. 로그 출력
-        log.info("Order List with Menus and Options: {}", orderList);
-
-        // 7. 최종 데이터 반환
-        return orderList;
-    }
-
-
- */
 }
+
+
+
+
