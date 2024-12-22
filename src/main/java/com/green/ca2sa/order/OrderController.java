@@ -1,6 +1,7 @@
 package com.green.ca2sa.order;
 
 import com.green.ca2sa.common.model.ResultResponse;
+import com.green.ca2sa.order.model.OrderDelReq;
 import com.green.ca2sa.order.model.OrderGetReq;
 import com.green.ca2sa.order.model.OrderGetRes;
 import com.green.ca2sa.order.model.OrderPostReq;
@@ -37,6 +38,16 @@ public class OrderController {
         return ResultResponse.<List<OrderGetRes>>builder()
                 .resultMessage("주문 조회 완료")
                 .resultData(list)
+                .build();
+    }
+
+    @DeleteMapping
+    @Operation(description = "주문 취소")
+    public ResultResponse<Integer> delOrder(OrderDelReq p){
+        log.info("OrderController > delOrder > req: {}", p);
+        return ResultResponse.<Integer>builder()
+                .resultMessage("주문 취소 완료")
+                .resultData(orderService.delOrder(p))
                 .build();
     }
 

@@ -68,4 +68,16 @@
         order by a.orderId desc
         limit #{startIdx}, #{size}
     </select>
+
+    <!-- 주문 상태 변경 취소인지 아닌지 -->
+    <update id="udtOrderState">
+        update order
+            set orderState = #{orderState}
+            where orderId = #{orderId}
+            and a.cafeId = #{cafeAdminId}
+    </update>
+
+
+
+
 </mapper>

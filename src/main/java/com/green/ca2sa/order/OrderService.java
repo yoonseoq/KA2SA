@@ -1,5 +1,6 @@
 package com.green.ca2sa.order;
 
+import com.green.ca2sa.order.model.OrderDelReq;
 import com.green.ca2sa.order.model.OrderGetReq;
 import com.green.ca2sa.order.model.OrderGetRes;
 import com.green.ca2sa.order.model.OrderPostReq;
@@ -104,6 +105,11 @@ public class OrderService {
         }
 
         return new ArrayList<>(orderMap.values());
+    }
+
+    public int delOrder(OrderDelReq p){
+        int result = orderMapper.delOrder(p);
+        return result;
     }
 }
 
