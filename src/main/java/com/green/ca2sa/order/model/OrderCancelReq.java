@@ -7,7 +7,9 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class OrderDelReq {
+public class OrderCancelReq {
+
     private long orderId;
-    private String reason; // 왜 취소 했는지?
+    private long signedUserId;
+
 }

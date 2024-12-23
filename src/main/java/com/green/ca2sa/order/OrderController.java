@@ -1,13 +1,12 @@
 package com.green.ca2sa.order;
 
 import com.green.ca2sa.common.model.ResultResponse;
-import com.green.ca2sa.order.model.OrderDelReq;
+import com.green.ca2sa.order.model.OrderCancelReq;
 import com.green.ca2sa.order.model.OrderGetReq;
 import com.green.ca2sa.order.model.OrderGetRes;
 import com.green.ca2sa.order.model.OrderPostReq;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,13 +40,13 @@ public class OrderController {
                 .build();
     }
 
-    @DeleteMapping
-    @Operation(description = "주문 취소")
-    public ResultResponse<Integer> delOrder(OrderDelReq p){
-        log.info("OrderController > delOrder > req: {}", p);
+    @PatchMapping
+    @Operation(description = "주문 취소 신청")
+    public ResultResponse<Integer> cancelOrder(OrderCancelReq p){
+        log.info("OrderController > cancelOrder > req: {}", p);
         return ResultResponse.<Integer>builder()
-                .resultMessage("주문 취소 완료")
-                .resultData(orderService.delOrder(p))
+                .resultMessage("주문 취소 신청 완료")
+                .resultData(orderService.cancelOrder(p))
                 .build();
     }
 
