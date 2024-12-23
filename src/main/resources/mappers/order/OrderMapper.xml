@@ -71,7 +71,7 @@
 
     <!-- 주문 취소 요청 -->
     <update id="cancelOrder">
-        update order
+        update `order`
             set orderProgress = 5
             where orderId = #{orderId}
             and userId = #{signedUserId}
