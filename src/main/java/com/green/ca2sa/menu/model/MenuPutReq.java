@@ -12,7 +12,6 @@ public class MenuPutReq {
 //    private long cafeId;
     @Schema(title = "메뉴 ID", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private long menuId;
-    private long cafeId;
     @Schema(title = "메뉴 이름", example = "아메리카노", requiredMode = Schema.RequiredMode.REQUIRED)
     private String menuName;
     @Schema(title = "가격", example = "2000", requiredMode = Schema.RequiredMode.REQUIRED)

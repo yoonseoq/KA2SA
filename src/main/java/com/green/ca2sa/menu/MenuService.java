@@ -81,34 +81,5 @@ public class MenuService {
         return res;
     }
 
-    // 내가 한것
-    @Transactional
-    public List<MenuGetRes> getMenuInfo(MenuGetReq p) {
 
-        List<MenuGetRes> res= mapper.getMenuInfo(p);
-
-        return res;
-
-    }
-
-
-
-    // 내가 한것
-    @Transactional
-    public int updateMenuInfo(MultipartFile pic,MenuPutReq p){
-        if(pic == null) {
-            int result=mapper.updateMenuInfo(p);
-            return result;
-        }
-
-        String savedPicName = myFileUtils.makeRandomFileName(pic);
-
-        p.setMenuPic(savedPicName);
-
-
-        return 0;
-
-
-
-    }
 }
