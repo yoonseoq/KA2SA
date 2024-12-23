@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class OrderController {
 
     @GetMapping
     @Operation(description = "주문 확인")
-    public ResultResponse<List<OrderGetRes>> getOrderList(OrderGetReq p) {
+    public ResultResponse<List<OrderGetRes>> getOrderList(@ParameterObject @ModelAttribute OrderGetReq p) {
         List<OrderGetRes> list = orderService.GetOrderList(p);
         return ResultResponse.<List<OrderGetRes>>builder()
                 .resultMessage("주문 조회 완료")
@@ -44,7 +45,7 @@ public class OrderController {
 
     @PatchMapping
     @Operation(description = "주문 취소 신청")
-    public ResultResponse<Integer> cancelOrder(OrderCancelReq p){
+    public ResultResponse<Integer> cancelOrder(@ParameterObject @ModelAttribute OrderCancelReq p){
         log.info("OrderController > cancelOrder > req: {}", p);
         return ResultResponse.<Integer>builder()
                 .resultMessage("주문 취소 신청 완료")
