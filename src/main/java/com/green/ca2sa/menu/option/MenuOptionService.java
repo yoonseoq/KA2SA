@@ -13,8 +13,8 @@ public class MenuOptionService {
     private final MenuOptionMapper mapper;
     private final MyFileUtils myFileUtils;
 
-    public int PostMenuOption(MenuOptionPostReq p) {
-        int result = mapper.insMenuOption(p);
+    public int postMenuOption(MenuOptionPostReq p) {
+        int result = mapper.postMenuOption(p);
         p.getMenuOptionId();
         return result;
     }

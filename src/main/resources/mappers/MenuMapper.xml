@@ -11,12 +11,11 @@
         menuPic = #{menuPic}
     </insert>
 
-    <select id = "selMenuList">
+    <select id = "getMenuInfo">
         SELECT `menuId`, `menuName`, `price`, `comment`, menuPic
         FROM menu
         WHERE cafeId = #{cafeId}
     </select>
-
 
 
     <delete id = "deleteMenu">
@@ -31,7 +30,6 @@
         LEFT JOIN menu_option b
         on a.menuId=b.menuId
         WHERE a.menuId=#{menuId}
-        AND a.cafeId=#{cafeId}
     </select>
 
 

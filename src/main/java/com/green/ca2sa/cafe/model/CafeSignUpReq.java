@@ -10,7 +10,6 @@ public class CafeSignUpReq {
     private String cafeName;
     private String location;
     private String tel;
-    private String cafePic;
     private String closeTime;
     private String openTime;
     private String email;
@@ -19,4 +18,6 @@ public class CafeSignUpReq {
     private int agree;
     @JsonIgnore
     private long cafeId;
+    @JsonIgnore
+    private String cafePic;
 }

@@ -20,6 +20,15 @@ public class MenuService {
 
     @Transactional
     public int postMenu(MultipartFile pic, MenuPostReq p) {
+        if (pic == null) {
+            int result = mapper.insMenu(p);
+            return result;
+        }
+
+        String savedPicName = myFileUtils.makeRandomFileName(pic);
+        p.setMenuPic(savedPicName);
+
+
         int result = mapper.insMenu(p);
 
         long menuId = p.getMenuId();
@@ -27,7 +36,6 @@ public class MenuService {
         String middlePath = String.format("/menu/%d", menuId);
         myFileUtils.makeFolders(middlePath);
 
-        String savedPicName = myFileUtils.makeRandomFileName(pic);
         String filePath = String.format("%s/%s", middlePath, savedPicName);
         try {
             myFileUtils.transferTo(pic, filePath);
@@ -36,15 +44,6 @@ public class MenuService {
         }
         return result;
     }
-
-    public List<MenuGetRes> getMenuList(MenuGetReq p) {
-        List<MenuGetRes> menuGetResList = mapper.selMenuList(p);
-
-
-    return null;
-    }
-
-
 
 
 
@@ -64,11 +63,47 @@ public class MenuService {
         return result;
     }
 
+
+
+    // 내가 한것.
     @Transactional
-    public MenuDetailGetRes getMenuDetailInfo(MenuDetailGetReq p) {
-        MenuDetailGetRes res= mapper.getMenuDetailInfo(p);
+    public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
+        List<MenuDetailGetRes> res= mapper.getMenuDetailInfo(p);
+
+        return res;
+    }
+
+    // 내가 한것
+    @Transactional
+    public List<MenuGetRes> getMenuInfo(MenuGetReq p) {
+
+        List<MenuGetRes> res= mapper.getMenuInfo(p);
 
         return res;
 
     }
+
+
+
+    // 내가 한것
+    @Transactional
+    public int updateMenuInfo(MultipartFile pic,MenuPutReq p){
+        if(pic == null) {
+            int result=mapper.updateMenuInfo(p);
+            return result;
+        }
+
+        String savedPicName = myFileUtils.makeRandomFileName(pic);
+
+        p.setMenuPic(savedPicName);
+
+
+        return 0;
+
+
+
+    }
+
+
+
 }

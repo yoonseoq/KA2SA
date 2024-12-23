@@ -1,25 +1,26 @@
 package com.green.ca2sa.menu;
 
 import com.green.ca2sa.common.model.ResultResponse;
-import com.green.ca2sa.menu.model.MenuDelReq;
-import com.green.ca2sa.menu.model.MenuDetailGetReq;
-import com.green.ca2sa.menu.model.MenuDetailGetRes;
-import com.green.ca2sa.menu.model.MenuPostReq;
+import com.green.ca2sa.menu.model.*;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("menu")
+@Tag(name = "메뉴 관련")
 public class MenuController {
     private final MenuService service;
 
     @PostMapping
     @Operation(summary = "Menu 등록")
-    public ResultResponse<Integer> postMenu(@RequestPart MultipartFile pic, @RequestPart MenuPostReq p) {
+    public ResultResponse<Integer> postMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPostReq p) {
         Integer result = service.postMenu(pic, p);
         return ResultResponse.<Integer>builder()
                              .resultMessage("메뉴 등록 완료")
@@ -37,14 +38,46 @@ public class MenuController {
                              .build();
     }
 
+
+    // 내가 한것.
     @GetMapping("detail")
     @Operation(summary = "Menu 상세 정보 불러오기")
-    public ResultResponse<MenuDetailGetRes> getMenuDetailInfo(@ParameterObject @ModelAttribute MenuDetailGetReq p) {
-        MenuDetailGetRes result = service.getMenuDetailInfo(p);
-        return ResultResponse.<MenuDetailGetRes>builder()
+    public ResultResponse<List<MenuDetailGetRes>> getMenuDetailInfo(@ParameterObject @ModelAttribute MenuDetailGetReq p) {
+        List<MenuDetailGetRes> result = service.getMenuDetailInfo(p);
+        return ResultResponse.<List<MenuDetailGetRes>>builder()
                 .resultMessage("메뉴 상세 정보 출력 완료")
                 .resultData(result)
                 .build();
     }
+
+    @GetMapping
+    @Operation(summary = "Menu 정보 불러오기")
+    public ResultResponse<List<MenuGetRes>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
+        List<MenuGetRes> result = service.getMenuInfo(p);
+
+        return ResultResponse.<List<MenuGetRes>>builder()
+                .resultMessage("메뉴 정보 출력 완료")
+                .resultData(result)
+                .build();
+
+    }
+
+
+    @PutMapping
+    @Operation(summary = "메뉴 정보 수정")
+
+    public ResultResponse<Integer> updateMenuInfo(@RequestPart(required = false) MultipartFile pic,@RequestPart MenuPutReq p) {
+
+
+
+        return null;
+
+    }
+
+
+
+
+
+
 
 }
