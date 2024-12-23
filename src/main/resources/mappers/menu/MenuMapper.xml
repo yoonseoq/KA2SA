@@ -47,6 +47,5 @@
         LEFT JOIN menu_option b
         on a.menuId=b.menuId
         WHERE a.menuId=#{menuId}
-        AND a.cafeId=#{cafeId}
     </select>
 </mapper>
