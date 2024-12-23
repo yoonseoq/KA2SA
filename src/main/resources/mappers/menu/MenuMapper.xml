@@ -41,6 +41,7 @@
         FROM menu
         WHERE menuId = #{menuId}
     </delete>
+
     <select id="getMenuDetailInfo">
         SELECT a.menuName,a.price,a.comment,a.menuPic,b.optionName,b.addPrice,b.required
         FROM menu a

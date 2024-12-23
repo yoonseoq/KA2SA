@@ -14,7 +14,7 @@ public class MenuOptionPostReq {
     private long menuId;
     @Schema(title = "옵션 이름", example = "아이스", requiredMode = Schema.RequiredMode.REQUIRED)
     private String optionName;
-    @Schema(title = "가격", example = "500", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "옵션 가격", example = "500", requiredMode = Schema.RequiredMode.REQUIRED)
     private int addPrice;
     @Schema(title = "필수 옵션", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private int required;

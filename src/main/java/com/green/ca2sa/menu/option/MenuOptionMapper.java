@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MenuOptionMapper {
-    int insMenuOption(MenuOptionPostReq p);
+    int postMenuOption(MenuOptionPostReq p);
     int deleteMenuOption(long p);
 }

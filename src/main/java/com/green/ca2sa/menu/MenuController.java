@@ -68,4 +68,34 @@ public class MenuController {
                 .build();
     }
 
+    @GetMapping
+    @Operation(summary = "Menu 정보 불러오기")
+    public ResultResponse<List<MenuGetRes>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
+        List<MenuGetRes> result = service.getMenuInfo(p);
+
+        return ResultResponse.<List<MenuGetRes>>builder()
+                .resultMessage("메뉴 정보 출력 완료")
+                .resultData(result)
+                .build();
+
+    }
+
+
+    @PutMapping
+    @Operation(summary = "메뉴 정보 수정")
+
+    public ResultResponse<Integer> updateMenuInfo(@RequestPart(required = false) MultipartFile pic,@RequestPart MenuPutReq p) {
+
+
+
+        return null;
+
+    }
+
+
+
+
+
+
+
 }

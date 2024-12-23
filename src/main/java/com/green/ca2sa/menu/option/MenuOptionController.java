@@ -17,7 +17,7 @@ public class MenuOptionController {
     @PostMapping
     @Operation(summary = "Menu 옵션 등록")
     public ResultResponse<Integer> postMenuOption(@RequestBody MenuOptionPostReq p) {
-        Integer result = service.PostMenuOption(p);
+        Integer result = service.postMenuOption(p);
         return ResultResponse.<Integer>builder()
                 .resultMessage("메뉴 옵션 등록 완료")
                 .resultData(result)
