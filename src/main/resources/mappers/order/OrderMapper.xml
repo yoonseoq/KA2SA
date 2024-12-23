@@ -69,12 +69,12 @@
         limit #{startIdx}, #{size}
     </select>
 
-    <!-- 주문 상태 변경 취소인지 아닌지 -->
-    <update id="udtOrderState">
+    <!-- 주문 취소 요청 -->
+    <update id="cancelOrder">
         update order
-            set orderState = #{orderState}
+            set orderProgress = 5
             where orderId = #{orderId}
-            and a.cafeId = #{cafeAdminId}
+            and userId = #{signedUserId}
     </update>
 
 
