@@ -10,6 +10,7 @@ import lombok.Setter;
 public class MenuPutReq {
     private long menuId;
     private long cafeId;
+    private long categoryId;
     @Schema(title = "메뉴 이름", example = "아메리카노", requiredMode = Schema.RequiredMode.REQUIRED)
     private String menuName;
     @Schema(title = "메뉴 가격", example = "2000", requiredMode = Schema.RequiredMode.REQUIRED)

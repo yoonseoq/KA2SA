@@ -20,6 +20,9 @@
     <update id = "updateMenuInfo">
         UPDATE menu
         <set>
+            <if test =" categoryId != null and categoryId != '' ">
+                categoryId = #{categoryId}
+            </if>
             <if test=" menuName !=null and menuName != '' ">
                 menuName = #{menuName},
             </if>
