@@ -41,4 +41,12 @@
         FROM menu
         WHERE menuId = #{menuId}
     </delete>
+    <select id="getMenuDetailInfo">
+        SELECT a.menuName,a.price,a.comment,a.menuPic,b.optionName,b.addPrice,b.required
+        FROM menu a
+        LEFT JOIN menu_option b
+        on a.menuId=b.menuId
+        WHERE a.menuId=#{menuId}
+        AND a.cafeId=#{cafeId}
+    </select>
 </mapper>
