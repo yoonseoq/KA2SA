@@ -11,6 +11,9 @@ public class MenuPostReq {
     @JsonIgnore
     private long menuId;
 
+    @JsonIgnore
+    private String menuPic;
+
     @Schema(title = "메뉴 PK", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private long cafeId;
     @Schema(title = "메뉴 이름", example = "아메리카노", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -19,6 +22,4 @@ public class MenuPostReq {
     private long price;
     @Schema(title = "메뉴 설명", example = "진하고 고소한 커피")
     private String comment;
-    @JsonIgnore
-    private String menuPic;
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.green.ca2sa.menu.MenuMapper">
-    <insert id = "insMenu" useGeneratedKeys="true" keyProperty="menuId">
+    <insert id = "postMenuInfo" useGeneratedKeys="true" keyProperty="menuId">
         INSERT INTO menu
         SET cafeId = #{cafeId},
         menuName = #{menuName},
@@ -17,8 +17,26 @@
         WHERE cafeId = #{cafeId}
     </select>
 
+    <update id = "updateMenuInfo">
+        UPDATE menu
+        <set>
+            <if test=" menuName !=null and menuName != '' ">
+                menuName = #{menuName},
+            </if>
+            <if test=" price !=null and price != '' ">
+                price = #{price},
+            </if>
+            <if test=" comment  !=null and comment != '' ">
+                comment = #{comment},
+            </if>
+            <if test=" menuPic  !=null and menuPic != '' ">
+                menuPic = #{menuPic},
+            </if>
+        </set>
+        WHERE cafeId = #{cafeId}
+    </update>
 
-    <delete id = "deleteMenu">
+    <delete id = "deleteMenuInfo">
         DELETE
         FROM menu
         WHERE menuId = #{menuId}
@@ -31,10 +49,4 @@
         on a.menuId=b.menuId
         WHERE a.menuId=#{menuId}
     </select>
-
-
-
-
-
-
 </mapper>

@@ -19,27 +19,45 @@ public class MenuController {
     private final MenuService service;
 
     @PostMapping
-    @Operation(summary = "Menu 등록")
-    public ResultResponse<Integer> postMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPostReq p) {
-        Integer result = service.postMenu(pic, p);
+    @Operation(summary = "Menu 등록하기")
+    public ResultResponse<Integer> postMenuInfo(@RequestPart MultipartFile pic, @RequestPart MenuPostReq p) {
+        Integer result = service.postMenuInfo(pic, p);
         return ResultResponse.<Integer>builder()
                              .resultMessage("메뉴 등록 완료")
                              .resultData(result)
                              .build();
     }
 
+    @GetMapping
+    @Operation(summary = "Menu 가져오기")
+    public ResultResponse<List<MenuGetRes>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
+        List<MenuGetRes> result = service.getMenuInfo(p);
+        return ResultResponse.<List<MenuGetRes>>builder()
+                             .resultMessage("메뉴 출력 완료")
+                             .resultData(result)
+                             .build();
+    }
+
+    @PutMapping
+    @Operation(summary = "Menu 수정하기")
+    public ResultResponse<Integer> updateMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPutReq p) {
+        int result = service.updateMenuInfo(pic, p);
+        return ResultResponse.<Integer>builder()
+                .resultMessage("메뉴 수정 완료")
+                .resultData(result)
+                .build();
+    }
+
     @DeleteMapping
-    @Operation(summary = "Menu 삭제", description = "메뉴의 옵션 모두 삭제 처리")
-    public ResultResponse<Integer> deleteMenu(@ParameterObject @ModelAttribute MenuDelReq p) {
-        Integer result = service.deleteMenu(p);
+    @Operation(summary = "Menu 삭제하기", description = "메뉴의 옵션 모두 삭제 처리")
+    public ResultResponse<Integer> deleteMenuInfo(@ParameterObject @ModelAttribute MenuDelReq p) {
+        Integer result = service.deleteMenuInfo(p);
         return ResultResponse.<Integer>builder()
                              .resultMessage("메뉴 삭제 완료")
                              .resultData(result)
                              .build();
     }
 
-
-    // 내가 한것.
     @GetMapping("detail")
     @Operation(summary = "Menu 상세 정보 불러오기")
     public ResultResponse<List<MenuDetailGetRes>> getMenuDetailInfo(@ParameterObject @ModelAttribute MenuDetailGetReq p) {

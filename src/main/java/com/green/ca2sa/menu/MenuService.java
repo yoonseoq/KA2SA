@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,18 +20,19 @@ public class MenuService {
     private final MyFileUtils myFileUtils;
 
     @Transactional
-    public int postMenu(MultipartFile pic, MenuPostReq p) {
-        if (pic == null) {
-            int result = mapper.insMenu(p);
-            return result;
+    public int postMenuInfo(MultipartFile pic, MenuPostReq p) {
+
+        // 사진 null 체크
+        if(pic==null){
+            return mapper.postMenuInfo(p);
         }
 
+        //메뉴 사진 req 객체에 넣기
         String savedPicName = myFileUtils.makeRandomFileName(pic);
         p.setMenuPic(savedPicName);
 
 
-        int result = mapper.insMenu(p);
-
+        int result = mapper.postMenuInfo(p);
         long menuId = p.getMenuId();
 
         String middlePath = String.format("/menu/%d", menuId);
@@ -39,11 +41,22 @@ public class MenuService {
         String filePath = String.format("%s/%s", middlePath, savedPicName);
         try {
             myFileUtils.transferTo(pic, filePath);
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
     }
+
+    public List<MenuGetRes> getMenuInfo(MenuGetReq p) {
+        return mapper.getMenuInfo(p);
+    }
+
+    @Transactional
+    public int updateMenuInfo(MultipartFile pic, MenuPutReq p) {
+        return mapper.updateMenuInfo(p);
+    }
+
+
 
 
 
@@ -51,21 +64,16 @@ public class MenuService {
 
 
     @Transactional
-    public int deleteMenu(MenuDelReq p) {
+    public int deleteMenuInfo(MenuDelReq p) {
 
-        int res = optionMapper.deleteMenuOption(p.getMenuId());
-
-        int result = mapper.deleteMenu(p);
+        int result = optionMapper.deleteMenuOption(p.getMenuId());
 
         String deletePath = String.format("%s/menu/%d", myFileUtils.getUploadPath(), p.getMenuId());
         myFileUtils.deleteFolder(deletePath, true);
 
-        return result;
+        return mapper.deleteMenuInfo(p);
     }
 
-
-
-    // 내가 한것.
     @Transactional
     public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
         List<MenuDetailGetRes> res= mapper.getMenuDetailInfo(p);
@@ -103,7 +111,4 @@ public class MenuService {
 
 
     }
-
-
-
 }

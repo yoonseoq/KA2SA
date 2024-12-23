@@ -12,19 +12,13 @@ public class MenuPutReq {
 //    private long cafeId;
     @Schema(title = "메뉴 ID", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private long menuId;
+    private long cafeId;
     @Schema(title = "메뉴 이름", example = "아메리카노", requiredMode = Schema.RequiredMode.REQUIRED)
     private String menuName;
     @Schema(title = "가격", example = "2000", requiredMode = Schema.RequiredMode.REQUIRED)
     private int price;
-    @Schema(title = "코멘트", example = "맛이 좋습니다", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "메뉴 설명", example = "진하고 고소한 커피")
     private String comment;
-    @Schema(title = "옵션 이름", example = "아이스", requiredMode = Schema.RequiredMode.REQUIRED)
-    private String optionName;
-    @Schema(title = "옵션 가격", example = "500", requiredMode = Schema.RequiredMode.REQUIRED)
-    private int addPrice;
-    @Schema(title = "필수 옵션", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
-    private int required;
-
 
     @JsonIgnore
     private String menuPic;
