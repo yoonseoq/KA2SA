@@ -63,11 +63,6 @@ public class CafeService {
         return result;
     }
 
-    // 카페 주문상태 변경
-    public int updCafeOrder(CafeOrderPutReq p){
-        return cafeMapper.updCafeOrder(p);
-    }
-
     // 카페 조회
     public CafeGetRes selCafe(CafeGetReq p){
         long cafeId= p.getCafeId();
@@ -83,15 +78,16 @@ public class CafeService {
         return 0;
     }
 
-    public CafeGetWeekRes selCafeSales(CafeGetWeekReq p){
-        List<CafeGetWeekDto> cafeGetWeekDtoList = cafeMapper.selSumPriceWeekOfDay(p);
+    // 카페 판매액 조회
+    public CafeGetSalesRes selCafeSales(CafeGetSalesReq p){
+        List<CafeGetSalesDto> cafeGetSalesDtoList = cafeMapper.selSumPriceWeekOfDay(p);
         int weekSum = 0;
-        for(CafeGetWeekDto c : cafeGetWeekDtoList){
+        for(CafeGetSalesDto c : cafeGetSalesDtoList){
             weekSum += c.getDaySumPrice();
         }
-        CafeGetWeekRes res = new CafeGetWeekRes();
+        CafeGetSalesRes res = new CafeGetSalesRes();
         res.setWeekSumPrice(weekSum);
-        res.setSelWeek(cafeGetWeekDtoList);
+        res.setSelWeek(cafeGetSalesDtoList);
         return res;
     }
 
