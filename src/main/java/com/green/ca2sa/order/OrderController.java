@@ -6,6 +6,7 @@ import com.green.ca2sa.order.model.OrderGetReq;
 import com.green.ca2sa.order.model.OrderGetRes;
 import com.green.ca2sa.order.model.OrderPostReq;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RequestMapping("order")
+@Tag(name = "주문 관련")
 public class OrderController {
     private final OrderService orderService;
 

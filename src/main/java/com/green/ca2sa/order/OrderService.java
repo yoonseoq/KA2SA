@@ -29,7 +29,7 @@ public class OrderService {
     public int PostOrder(OrderPostReq p) {
         log.info("OrderPostReq:{}", p);
         int result = orderMapper.insOrder(p);
-        // xml에 foreach문 사용해서 올리기
+        // xml 에 foreach 문 사용해서 올리기
         List<OrderMenuPostReq> menuList = p.getMenuList().stream()
                 .peek(item -> item.setOrderId(p.getOrderId())) //오더 아이디 다 집어 넣어주는거 그냥 for문 돌리면서 값 넣어주는거로 보면 된다
                 .toList();
@@ -108,8 +108,8 @@ public class OrderService {
     }
 
     public int cancelOrder(OrderCancelReq p){
-        int result = orderMapper.cancelOrder(p);
-        return result;
+        return orderMapper.cancelOrder(p);
+
     }
 }
 
