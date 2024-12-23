@@ -1,6 +1,7 @@
 package com.green.ca2sa.order.model;
 
 import com.green.ca2sa.order.orderMenu.model.OrderMenuDto;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,7 +9,7 @@ import lombok.ToString;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Setter
+@Builder
 @Getter
 @ToString
 public class OrderGetRes {
