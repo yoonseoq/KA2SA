@@ -5,8 +5,6 @@ import com.green.ca2sa.cafe.menu.model.CafeGetMenuReq;
 import com.green.ca2sa.cafe.menu.model.CafeGetMenuRes;
 import com.green.ca2sa.cafe.menu.model.CafeGetOptionReq;
 import com.green.ca2sa.cafe.menu.model.CafeGetOptionRes;
-import com.green.ca2sa.cafe.order.model.CafeOrderGetReq;
-import com.green.ca2sa.cafe.order.model.CafeOrderGetRes;
 import com.green.ca2sa.common.model.ResultResponse;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
