@@ -63,11 +63,6 @@ public class CafeService {
         return result;
     }
 
-    // 카페 주문상태 변경
-    public int updCafeOrder(CafeOrderPutReq p){
-        return cafeMapper.updCafeOrder(p);
-    }
-
     // 카페 조회
     public CafeGetRes selCafe(CafeGetReq p){
         long cafeId= p.getCafeId();

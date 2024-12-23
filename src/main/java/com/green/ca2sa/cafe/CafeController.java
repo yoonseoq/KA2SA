@@ -84,13 +84,4 @@ public class CafeController {
                 .build();
     }
 
-    @PatchMapping("/order")
-    @Operation(summary = "카페 주문상태 수정")
-    public ResultResponse<Integer> patchCafeOrder(CafeOrderPutReq p){
-        int result = cafeService.updCafeOrder(p);
-        return ResultResponse.<Integer>builder()
-                .resultMessage("변경 완료")
-                .resultData(result)
-                .build();
-    }
 }
