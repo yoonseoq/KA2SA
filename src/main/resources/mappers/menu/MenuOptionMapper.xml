@@ -10,6 +10,25 @@
         required = #{required}
     </insert>
 
+    <update id = "updateMenuOptionInfo">
+        UPDATE menu_option
+        <set>
+            <if test=" menuOptionId != null and menuOptionId != '' ">
+                menuOptionId = #{menuOptionId},
+            </if>
+            <if test=" optionName != null and optionName != '' ">
+                optionName = #{optionName},
+            </if>
+            <if test=" addPrice != null and addPrice != '' ">
+                addPrice = #{addPrice},
+            </if>
+            <if test=" required != null and required != '' ">
+                required = #{required}
+            </if>
+        </set>
+        WHERE menuId = #{menuId}
+    </update>
+
    <delete id = "deleteMenuOption">
         DELETE
         FROM menu_option
