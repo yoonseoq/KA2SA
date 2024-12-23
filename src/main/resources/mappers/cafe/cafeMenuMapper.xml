@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.ca2sa.cafe.menu.CafeMenuMapper">
+    <select id="selCafeMenu">
+        SELECT menuId, menuName, price, `comment`, menuPic
+        FROM menu
+        WHERE cafeId = #{cafeId}
+    </select>
+
+    <select id="selCafeMenuOption">
+        SELECT b.optionName, b.addPrice, b.required, a.menuName
+        FROM menu A
+        JOIN menu_option B
+        ON a.menuId = b.menuId
+        WHERE a.menuId = #{menuId}
+    </select>
+</mapper>
