@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.BindParam;
 
 @Getter
 @Setter
-public class CafeGetWeekReq {
+public class CafeGetSalesReq {
     @Schema(name = "days_ago")
     private String daysAgo;
     @Schema(name = "cafe_id")
@@ -16,8 +16,8 @@ public class CafeGetWeekReq {
     private int orderProgress;
     private String today;
 
-    public CafeGetWeekReq(@BindParam("days_ago") String daysAgo,@BindParam("cafe_id") long cafeId,
-                          @BindParam("order_progress")int orderProgress, String today) {
+    public CafeGetSalesReq(@BindParam("days_ago") String daysAgo, @BindParam("cafe_id") long cafeId,
+                           @BindParam("order_progress")int orderProgress, String today) {
         this.daysAgo = daysAgo;
         this.cafeId = cafeId;
         this.orderProgress = orderProgress;

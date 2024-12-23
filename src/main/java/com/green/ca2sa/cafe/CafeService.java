@@ -84,15 +84,15 @@ public class CafeService {
     }
 
     // 카페 판매액 조회
-    public CafeGetWeekRes selCafeSales(CafeGetWeekReq p){
-        List<CafeGetWeekDto> cafeGetWeekDtoList = cafeMapper.selSumPriceWeekOfDay(p);
+    public CafeGetSalesRes selCafeSales(CafeGetSalesReq p){
+        List<CafeGetSalesDto> cafeGetSalesDtoList = cafeMapper.selSumPriceWeekOfDay(p);
         int weekSum = 0;
-        for(CafeGetWeekDto c : cafeGetWeekDtoList){
+        for(CafeGetSalesDto c : cafeGetSalesDtoList){
             weekSum += c.getDaySumPrice();
         }
-        CafeGetWeekRes res = new CafeGetWeekRes();
+        CafeGetSalesRes res = new CafeGetSalesRes();
         res.setWeekSumPrice(weekSum);
-        res.setSelWeek(cafeGetWeekDtoList);
+        res.setSelWeek(cafeGetSalesDtoList);
         return res;
     }
 

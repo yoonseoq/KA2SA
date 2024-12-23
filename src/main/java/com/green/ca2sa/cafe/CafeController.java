@@ -64,9 +64,9 @@ public class CafeController {
     }
     @GetMapping("sales")
     @Operation(summary = "카페 판매액 조회")
-    public ResultResponse<CafeGetWeekRes> getCafeSales(@ParameterObject @ModelAttribute CafeGetWeekReq p) {
-        CafeGetWeekRes res = cafeService.selCafeSales(p);
-        return ResultResponse.<CafeGetWeekRes>builder()
+    public ResultResponse<CafeGetSalesRes> getCafeSales(@ParameterObject @ModelAttribute CafeGetSalesReq p) {
+        CafeGetSalesRes res = cafeService.selCafeSales(p);
+        return ResultResponse.<CafeGetSalesRes>builder()
                 .resultData(res)
                 .resultMessage("조회 완료")
                 .build();

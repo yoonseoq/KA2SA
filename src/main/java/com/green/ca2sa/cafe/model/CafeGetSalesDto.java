@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CafeGetWeekDto {
+public class CafeGetSalesDto {
     private int daySumPrice;
     private String orderDate;
 
