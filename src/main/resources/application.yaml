@@ -8,6 +8,9 @@ file:
 mybatis:
   mapper-locations: mappers/**/*.xml
 
+server:
+  port: 8090
+
 spring:
   application:
     name: CA2SA
