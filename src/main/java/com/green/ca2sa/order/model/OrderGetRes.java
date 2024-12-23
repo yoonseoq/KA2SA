@@ -19,6 +19,7 @@ public class OrderGetRes {
     private String pickUpTime;
     private String createdAt;
     private String memo;
+    private int orderProgress;
 
     private List<OrderMenuDto> orderMenuList;
 }
