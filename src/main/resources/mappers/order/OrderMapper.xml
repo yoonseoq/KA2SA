@@ -46,7 +46,7 @@
     <!-- 주문 리스트 조회 -->
     <select id="getOrderList" resultMap="OrderResultMap">
         select
-        a.orderId, b.nickName, c.cafeName, c.location,
+        a.orderId, a.orderProgress, b.nickName, c.cafeName, c.location,
         a.pickUpTime, a.createdAt, a.memo,
         d.orderMenuId, e.menuName, e.price,
         g.menuOptionId, g.optionName, g.addPrice, g.required
