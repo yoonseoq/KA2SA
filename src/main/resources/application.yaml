@@ -3,10 +3,13 @@ const:
   auth-code-length: 6
 
 file:
-  directory: D:\sys\CA2SA\image
+  directory: D:\LJY\CA2SA\image
 
 mybatis:
   mapper-locations: mappers/**/*.xml
+
+server:
+  port: 8090
 
 spring:
   application:
@@ -34,6 +37,7 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML
+
 
 springdoc:
   swagger-ui:

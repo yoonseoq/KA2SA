@@ -1,4 +1,4 @@
-package com.green.ca2sa.cafe.model;
+package com.green.ca2sa.cafe.order.model;
 
 import com.green.ca2sa.common.model.Paging;
 import io.swagger.v3.oas.annotations.media.Schema;

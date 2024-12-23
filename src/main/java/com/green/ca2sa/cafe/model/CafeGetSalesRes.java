@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CafeGetWeekRes {
-    private List<CafeGetWeekDto> selWeek;
+public class CafeGetSalesRes {
+    private List<CafeGetSalesDto> selWeek;
     private int weekSumPrice;
 }
