@@ -3,10 +3,10 @@ const:
   auth-code-length: 6
 
 file:
-  directory: D:/LJY/CA2SA/image
+  directory: D:\pjh\CA2SA\image
 
 mybatis:
-  mapper-locations: mappers/**/*.xml
+  mapper-locations: mappers.menu/**/*.xml
 
 spring:
   application:

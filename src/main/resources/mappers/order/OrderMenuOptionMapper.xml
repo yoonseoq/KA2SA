@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.ca2sa.order.orderMenu.OrderMenuOptionMapper">
+    <insert id="insOrderMenuOption">
+        insert into order_menu_option ( orderMenuId, menuOptionId)
+        values
+        <foreach collection="p" item="item" separator=",">
+        ( #{item.orderMenuId},#{item.menuOptionId})
+
+        </foreach>
+    </insert>
+
+    <select id="selMenuOptionList">
+        select group_concat(b.optionName)
+        from `order_menu_option` a
+        left join `menu_option` b
+        on
+        where a.menuOptionId = #{menuOptionId}
+    </select>
+</mapper>
