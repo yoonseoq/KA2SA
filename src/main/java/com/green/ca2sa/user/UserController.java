@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("user")
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class UserController {
                 .build();
     }
 
-    @PostMapping("sing-in")
+    @PostMapping("sign-in")
     @Operation(summary = "로그인")
     public ResultResponse<UserSingInRes> postUserSignIn(@RequestBody UserSignInReq p){
         UserSingInRes res=service.postUserSingIn(p);
@@ -87,5 +89,16 @@ public class UserController {
 
     }
 
+    @GetMapping
+    @Operation(summary = "카페 정보 전체 출력")
+    public ResultResponse<List<UserCafeInfoGetRes>> getUserCafeInfo() {
+        List<UserCafeInfoGetRes> result = service.getUserCafeInfo();
+
+        return ResultResponse.<List<UserCafeInfoGetRes>>builder()
+                .resultMessage("카페 정보 출력 완료")
+                .resultData(result)
+                .build();
+
+    }
 
 }

@@ -45,6 +45,13 @@
         WHERE userId=#{userId}
     </delete>
 
+    <select id="getUserCafeInfo">
+        SELECT cafeId,cafeName,cafePic,location
+        FROM cafe
+    </select>
+
+
+
 
 
 </mapper>

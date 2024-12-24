@@ -7,6 +7,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -80,4 +82,14 @@ public class UserService {
 
         return result;
     }
+
+    public List<UserCafeInfoGetRes> getUserCafeInfo(){
+        List<UserCafeInfoGetRes> result=mapper.getUserCafeInfo();
+
+
+        return result;
+
+    }
+
+
 }
