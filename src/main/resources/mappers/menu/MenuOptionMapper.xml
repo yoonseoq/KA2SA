@@ -16,10 +16,10 @@
             <if test=" optionName != null and optionName != '' ">
                 optionName = #{optionName},
             </if>
-            <if test=" addPrice != null and addPrice != '' ">
+            <if test=" addPrice != null">
                 addPrice = #{addPrice},
             </if>
-            <if test=" required != null and required != '' ">
+            <if test=" required != null">
                 required = #{required}
             </if>
         </set>

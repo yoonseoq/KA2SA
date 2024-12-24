@@ -39,7 +39,7 @@ public class MenuController {
                              .build();
     }
 
-    @PutMapping
+    @PatchMapping
     @Operation(summary = "Menu 수정하기")
     public ResultResponse<Integer> updateMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPutReq p) {
         int result = service.updateMenuInfo(pic, p);
