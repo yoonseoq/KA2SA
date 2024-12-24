@@ -18,6 +18,8 @@ import java.util.List;
 public class MenuController {
     private final MenuService service;
 
+
+    // postMenuInfo 완료- 12월 24일
     @PostMapping
     @Operation(summary = "Menu 등록하기")
     public ResultResponse<Integer> postMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPostReq p) {
@@ -50,7 +52,7 @@ public class MenuController {
                 .build();
     }
 
-    // 건들지 말기
+    // 수정했음. 건들지 말기
     @DeleteMapping
     @Operation(summary = "Menu 삭제하기", description = "메뉴의 옵션 모두 삭제 처리")
     public ResultResponse<Integer> deleteMenuInfo(@ParameterObject @ModelAttribute MenuDelReq p) {

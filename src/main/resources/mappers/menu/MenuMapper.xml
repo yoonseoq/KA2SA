@@ -13,6 +13,9 @@
     </insert>
 
 
+
+
+
     <select id = "getMenuInfo">
         SELECT a.menuId, a.menuName, a.price, a.comment, a.menuPic, b.category
         FROM menu a
@@ -44,6 +47,7 @@
         DELETE
         FROM menu
         WHERE menuId = #{menuId}
+        AND cafeId=#{cafeId}
     </delete>
 
     <select id="getMenuDetailInfo">

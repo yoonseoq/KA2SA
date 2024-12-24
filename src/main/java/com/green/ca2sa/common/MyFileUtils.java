@@ -47,10 +47,15 @@ public class MyFileUtils {
             File[] includedFiles = dir.listFiles();
             for (File file : includedFiles) {
                 if (file.isDirectory()) {
-                    Path filePath = Paths.get(file.getAbsolutePath());
-                    return deleteFolder(filePath.subpath(3, filePath.getNameCount()).toString(), true);
+//                    Path filePath = Paths.get(file.getAbsolutePath());
+                    return deleteFolder(file.getPath(), true);
+//                    return deleteFolder(filePath.subpath(3, filePath.getNameCount()).toString(), true);
+                } else{
+                    if(!file.delete()) {
+                        System.out.println("파일삭제실패");
+                    }
                 }
-                return file.delete();
+//                return file.delete();
             }
             if (delRootFolder) {
                 return dir.delete();

@@ -28,9 +28,10 @@ public class MenuService {
     @Transactional
     public int postMenuInfo(MultipartFile pic, MenuPostReq p) {
 
+        mapper.postCategoryInfo(p);
+
         // 사진 null 체크
         if(pic==null){
-            mapper.postCategoryInfo(p.getCategory());
             return mapper.postMenuInfo(p);
         }
 
@@ -38,14 +39,16 @@ public class MenuService {
         String savedPicName = myFileUtils.makeRandomFileName(pic);
         p.setMenuPic(savedPicName);
 
-        mapper.postCategoryInfo(p.getCategory());
+
+        System.out.println(p.getCategoryId());
 
 
 
         int result = mapper.postMenuInfo(p);
         long menuId = p.getMenuId();
+        long cafeId=p.getCafeId();
 
-        String middlePath = String.format("/menu/%d", menuId);
+        String middlePath = String.format("cafe/%d/menu/%d",cafeId,menuId); // 폴더 위치 수정했음
         myFileUtils.makeFolders(middlePath);
 
         String filePath = String.format("%s/%s", middlePath, savedPicName);
@@ -71,7 +74,7 @@ public class MenuService {
 
         int result = optionMapper.deleteMenuOption(p.getMenuId());
 
-        String deletePath = String.format("%s/menu/%d", myFileUtils.getUploadPath(), p.getMenuId());
+        String deletePath = String.format("cafe/%d/menu/%d",p.getCafeId(), p.getMenuId());
         myFileUtils.deleteFolder(deletePath, true);
 
         return mapper.deleteMenuInfo(p);
