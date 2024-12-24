@@ -2,13 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.green.ca2sa.menu.option.MenuOptionMapper">
-    <insert id = "insMenuOption" useGeneratedKeys="true" keyProperty="menuOptionId">
+    <insert id = "postMenuOptionInfo" useGeneratedKeys="true" keyProperty="menuOptionId">
         INSERT INTO menu_option
         SET menuId = #{menuId},
         optionName = #{optionName},
-        addPrice = #{addPrice},
-        required = #{required}
+        addPrice = #{addPrice}
     </insert>
+
+    <update id = "updateMenuOptionInfo">
+        UPDATE menu_option
+        <set>
+            <if test=" optionName != null and optionName != '' ">
+                optionName = #{optionName},
+            </if>
+            <if test=" addPrice != null">
+                addPrice = #{addPrice}
+            </if>
+        </set>
+        WHERE menuId = #{menuId}
+        AND menuOptionId = #{menuOptionId}
+    </update>
 
    <delete id = "deleteMenuOption">
         DELETE

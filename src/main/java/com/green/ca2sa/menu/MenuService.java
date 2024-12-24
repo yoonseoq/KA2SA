@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,7 +22,7 @@ public class MenuService {
     public int postMenuInfo(MultipartFile pic, MenuPostReq p) {
 
         // 사진 null 체크
-        if(pic==null){
+        if (pic == null) {
             return mapper.postMenuInfo(p);
         }
 
@@ -52,16 +51,36 @@ public class MenuService {
     }
 
     @Transactional
-    public int updateMenuInfo(MultipartFile pic, MenuPutReq p) {
-        return mapper.updateMenuInfo(p);
+    public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
+        List<MenuDetailGetRes> res = mapper.getMenuDetailInfo(p);
+        return res;
     }
 
+    @Transactional
+    public int updateMenuInfo(MultipartFile pic, MenuPutReq p) {
+        if (pic == null) {
+            return mapper.updateMenuInfo(p);
+        }
+        String deletePath = String.format("/menu/%d", p.getCafeId());
+        myFileUtils.deleteFolder(deletePath, true);
 
+        String savedPicName = myFileUtils.makeRandomFileName(pic);
+        p.setMenuPic(savedPicName);
 
+        int result = mapper.updateMenuInfo(p);
 
+        long menuId = p.getMenuId();
+        String middlePath = String.format("/menu/%d", menuId);
+        myFileUtils.makeFolders(middlePath);
 
-
-
+        String filePath = String.format("%s/%s", middlePath, savedPicName);
+        try {
+            myFileUtils.transferTo(pic, filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     @Transactional
     public int deleteMenuInfo(MenuDelReq p) {
@@ -72,13 +91,5 @@ public class MenuService {
         myFileUtils.deleteFolder(deletePath, true);
 
         return mapper.deleteMenuInfo(p);
-    }
-
-    @Transactional
-    public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
-        List<MenuDetailGetRes> res= mapper.getMenuDetailInfo(p);
-
-        return res;
-
     }
 }

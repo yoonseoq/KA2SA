@@ -9,7 +9,7 @@ import java.util.List;
 public interface MenuMapper {
     int postMenuInfo(MenuPostReq p);
     List<MenuGetRes> getMenuInfo(MenuGetReq p);
+    List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p);
     int updateMenuInfo(MenuPutReq p);
     int deleteMenuInfo(MenuDelReq p);
-    List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p);
 }

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@Tag(name = "메뉴 정보", description = "메뉴 등록, 메뉴 불러오기, 수정, 삭제")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("menu")
@@ -23,9 +24,9 @@ public class MenuController {
     public ResultResponse<Integer> postMenuInfo(@RequestPart MultipartFile pic, @RequestPart MenuPostReq p) {
         Integer result = service.postMenuInfo(pic, p);
         return ResultResponse.<Integer>builder()
-                             .resultMessage("메뉴 등록 완료")
-                             .resultData(result)
-                             .build();
+                .resultMessage("메뉴 등록 완료")
+                .resultData(result)
+                .build();
     }
 
     @GetMapping
@@ -33,12 +34,12 @@ public class MenuController {
     public ResultResponse<List<MenuGetRes>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
         List<MenuGetRes> result = service.getMenuInfo(p);
         return ResultResponse.<List<MenuGetRes>>builder()
-                             .resultMessage("메뉴 출력 완료")
-                             .resultData(result)
-                             .build();
+                .resultMessage("메뉴 출력 완료")
+                .resultData(result)
+                .build();
     }
 
-    @PutMapping
+    @PatchMapping
     @Operation(summary = "Menu 수정하기")
     public ResultResponse<Integer> updateMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPutReq p) {
         int result = service.updateMenuInfo(pic, p);
@@ -53,9 +54,9 @@ public class MenuController {
     public ResultResponse<Integer> deleteMenuInfo(@ParameterObject @ModelAttribute MenuDelReq p) {
         Integer result = service.deleteMenuInfo(p);
         return ResultResponse.<Integer>builder()
-                             .resultMessage("메뉴 삭제 완료")
-                             .resultData(result)
-                             .build();
+                .resultMessage("메뉴 삭제 완료")
+                .resultData(result)
+                .build();
     }
 
     @GetMapping("detail")
@@ -67,5 +68,4 @@ public class MenuController {
                 .resultData(result)
                 .build();
     }
-
 }
