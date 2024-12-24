@@ -10,6 +10,5 @@ public class CafeGetOptionRes {
     private String optionName;
     private long menuOptionId;
     private int addPrice;
-    private int required;
     private String menuName;
 }
