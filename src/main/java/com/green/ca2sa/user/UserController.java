@@ -38,7 +38,7 @@ public class UserController {
                 .build();
     }
 
-    @PostMapping("sing-in")
+    @PostMapping("sign-in")
     @Operation(summary = "로그인")
     public ResultResponse<UserSingInRes> postUserSignIn(@RequestBody UserSignInReq p){
         UserSingInRes res=service.postUserSingIn(p);
