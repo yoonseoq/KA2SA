@@ -32,8 +32,8 @@ public class UserController {
 
     @GetMapping("check-email")
     @Operation(summary = "이메일 중복 확인")
-    public ResultResponse<Integer> getUserEmailCheck(@RequestParam String email){
-        int result=service.getUserEmailCheck(email);
+    public ResultResponse<Integer> getUserEmailCheck(@ParameterObject @ModelAttribute EmailCheckReq p){
+        int result=service.getUserEmailCheck(p.getEmail());
 
         return ResultResponse.<Integer>builder()
                 .resultData(result)
