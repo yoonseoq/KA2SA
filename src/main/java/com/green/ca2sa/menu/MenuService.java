@@ -22,7 +22,6 @@ public class MenuService {
 
     @Transactional
     public int postMenuInfo(MultipartFile pic, MenuPostReq p) {
-        mapper.postMenuCategoryInfo(p);
 
         // 사진 null 체크
         if (pic == null) {
