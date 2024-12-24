@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface CafeMapper {
     int updCafe(CafePutReq p);
-    CafeGetRes selCafe(long cafeId);
+    CafeGetRes selCafe(CafeGetReq p);
     String cafeEmailCheck(String email);
     int insCafe(CafeSignUpReq p);
     CafeSignInRes signInCafe(String email);

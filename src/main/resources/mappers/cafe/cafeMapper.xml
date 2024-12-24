@@ -47,9 +47,16 @@
     <insert id="insCafe" useGeneratedKeys="true" keyProperty="cafeId">
         insert into cafe
         set
+
         cafeName = #{cafeName}, location = #{location}, tel = #{tel}, cafePic = #{cafePic},
-        closeTime = #{closeTime}, openTime = #{openTime}, email = #{email},
+
+            closeTime = #{closeTime},
+
+            openTime = #{openTime},
+
+        email = #{email},
         apw = #{apw}, businessNumber = #{businessNumber}, agree = #{agree}
+
     </insert>
 
     <select id="signInCafe">
