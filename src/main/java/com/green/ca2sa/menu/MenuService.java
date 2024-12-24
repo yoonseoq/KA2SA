@@ -84,7 +84,7 @@ public class MenuService {
 
         int result = optionMapper.deleteMenuOption(p.getMenuId());
 
-        String deletePath = String.format("cafe/%d/menu/%d",p.getCafeId(), p.getMenuId());
+        String deletePath = String.format("cafe/%d/menu/%d", p.getCafeId(), p.getMenuId());
         myFileUtils.deleteFolder(deletePath, true);
 
         return mapper.deleteMenuInfo(p);
