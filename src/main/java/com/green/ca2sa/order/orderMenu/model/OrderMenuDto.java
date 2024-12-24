@@ -15,6 +15,7 @@ public class OrderMenuDto {
     private long orderMenuId;
     private String menuName;
     private int price;
+    private int count;
 
     private List<OrderMenuOptionDto> orderMenuOptions;
 }

@@ -48,7 +48,7 @@
         select
         a.orderId, a.orderProgress, b.nickName, c.cafeName, c.location,
         a.pickUpTime, a.createdAt, a.memo,
-        d.orderMenuId, e.menuName, e.price,
+        d.orderMenuId, e.menuName, e.price, f.count,
         g.menuOptionId, g.optionName, g.addPrice, g.required
         from `order` a
         inner join `user` b on a.userId = b.userId

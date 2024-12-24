@@ -83,6 +83,7 @@ public class OrderService {
                                         .orderMenuId(orderMenu.getOrderMenuId())
                                         .menuName(orderMenu.getMenuName())
                                         .price(orderMenu.getPrice())
+                                        .count(orderMenu.getCount())
                                         .orderMenuOptions(new LinkedList<>())
                                         .build()
                             );
