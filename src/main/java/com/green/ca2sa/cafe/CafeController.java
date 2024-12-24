@@ -75,9 +75,10 @@ public class CafeController {
 
     @PatchMapping
     @Operation(summary = "카페 정보 수정")
-    public ResultResponse<Integer> patchCafe(@RequestBody CafePutReq p){
+    public ResultResponse<Integer> patchCafe(@RequestPart(required = false) MultipartFile pic,
+                                             @RequestPart CafePutReq p){
         log.info("p 값 {}",p);
-        int result = cafeService.updCafe(p);
+        int result = cafeService.updCafe(pic,p);
         return ResultResponse.<Integer>builder()
                 .resultData(result)
                 .resultMessage(result == 0 ? "카페정보 수정 실패" : "카페정보 수정 완료")

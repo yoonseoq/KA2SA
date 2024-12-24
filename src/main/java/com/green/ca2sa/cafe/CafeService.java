@@ -3,6 +3,7 @@ package com.green.ca2sa.cafe;
 import com.green.ca2sa.cafe.model.*;
 import com.green.ca2sa.common.MyFileUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,9 +13,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CafeService {
     private final CafeMapper cafeMapper;
     private final MyFileUtils myFileUtils;
+
 
     // 카페 회원 가입
     public int signUpCafe(MultipartFile pic, CafeSignUpReq p){
@@ -58,15 +61,35 @@ public class CafeService {
 
 
     // 카페 정보 변경
-    public int updCafe(CafePutReq p){
+    public int updCafe(MultipartFile pic, CafePutReq p){
+        String fileName = pic != null ? myFileUtils.makeRandomFileName(pic) : null;
+        long cafeId = p.getCafeId();
+        String folderPath = String.format("cafe/%d",cafeId);
+        myFileUtils.makeFolders(folderPath);
+        p.setCafePic(fileName);
+
+        String deletePath = String.format("%s/cafe/%d",myFileUtils.getUploadPath(),cafeId);
+        myFileUtils.deleteFolder(deletePath,false);
+
+        if(p.getCafePic() == null){
+            int res = cafeMapper.updCafe(p);
+            return res;
+        }
+
+        String filePath = String.format("%s/%s",folderPath,fileName);
+        try{
+            myFileUtils.transferTo(pic,filePath);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         int result = cafeMapper.updCafe(p);
+
         return result;
     }
 
     // 카페 조회
     public CafeGetRes selCafe(CafeGetReq p){
-        long cafeId= p.getCafeId();
-        CafeGetRes res = cafeMapper.selCafe(cafeId);
+        CafeGetRes res = cafeMapper.selCafe(p);
         return res;
     }
 
