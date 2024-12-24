@@ -87,12 +87,13 @@ public class MenuService {
         myFileUtils.deleteFolder(deletePath, true);
 
         return mapper.deleteMenuInfo(p);
+
+
     }
 
     @Transactional
     public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
-        List<MenuDetailGetRes> res= mapper.getMenuDetailInfo(p);
-
+        List<MenuDetailGetRes> res = mapper.getMenuDetailInfo(p);
         return res;
     }
 }
