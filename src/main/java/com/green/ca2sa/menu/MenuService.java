@@ -4,6 +4,7 @@ import com.green.ca2sa.common.MyFileUtils;
 import com.green.ca2sa.menu.model.*;
 import com.green.ca2sa.menu.option.MenuOptionMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MenuService {
     private final MenuMapper mapper;
     private final MenuOptionMapper optionMapper;
@@ -33,8 +35,9 @@ public class MenuService {
 
         int result = mapper.postMenuInfo(p);
         long menuId = p.getMenuId();
+        long cafeId=p.getCafeId();
 
-        String middlePath = String.format("/menu/%d", menuId);
+        String middlePath = String.format("cafe/%d/menu/%d",cafeId,menuId); // 폴더 위치 수정했음
         myFileUtils.makeFolders(middlePath);
 
         String filePath = String.format("%s/%s", middlePath, savedPicName);
@@ -46,14 +49,8 @@ public class MenuService {
         return result;
     }
 
-    public List<MenuGetRes> getMenuInfo(MenuGetReq p) {
+    public List<MenuGetDto> getMenuInfo(MenuGetReq p) {
         return mapper.getMenuInfo(p);
-    }
-
-    @Transactional
-    public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
-        List<MenuDetailGetRes> res = mapper.getMenuDetailInfo(p);
-        return res;
     }
 
     @Transactional
@@ -87,9 +84,18 @@ public class MenuService {
 
         int result = optionMapper.deleteMenuOption(p.getMenuId());
 
-        String deletePath = String.format("%s/menu/%d", myFileUtils.getUploadPath(), p.getMenuId());
+        String deletePath = String.format("cafe/%d/menu/%d",p.getCafeId(), p.getMenuId());
         myFileUtils.deleteFolder(deletePath, true);
 
         return mapper.deleteMenuInfo(p);
     }
+
+    @Transactional
+    public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
+        List<MenuDetailGetRes> res= mapper.getMenuDetailInfo(p);
+
+        return res;
+    }
+
+
 }

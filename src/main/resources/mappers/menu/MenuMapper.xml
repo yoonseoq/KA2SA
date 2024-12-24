@@ -8,12 +8,19 @@
         menuName = #{menuName},
         price = #{price},
         comment = #{comment},
-        menuPic = #{menuPic}
+        menuPic = #{menuPic},
+        categoryId=#{categoryId}
     </insert>
 
+
+
+
+
     <select id = "getMenuInfo">
-        SELECT `menuId`, `menuName`, `price`, `comment`, menuPic
-        FROM menu
+        SELECT a.menuId, a.menuName, a.price, a.comment, a.menuPic, b.category
+        FROM menu a
+        LEFT JOIN category b
+        ON a.categoryId=b.categoryId
         WHERE cafeId = #{cafeId}
     </select>
 
@@ -51,5 +58,6 @@
         DELETE
         FROM menu
         WHERE menuId = #{menuId}
+        AND cafeId=#{cafeId}
     </delete>
 </mapper>
