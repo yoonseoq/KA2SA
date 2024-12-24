@@ -34,9 +34,9 @@ public class MenuController {
     // getMenuInfo 완료 -  12월23일
     @GetMapping
     @Operation(summary = "Menu 가져오기")
-    public ResultResponse<List<MenuGetRes>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
+    public ResultResponse<List<MenuGetDto>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
         List<MenuGetDto> result = service.getMenuInfo(p);
-        return ResultResponse.<List<MenuGetRes>>builder()
+        return ResultResponse.<List<MenuGetDto>>builder()
                 .resultMessage("메뉴 출력 완료")
                 .resultData(result)
                 .build();
