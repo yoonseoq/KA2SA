@@ -1,11 +1,11 @@
-package com.green.ca2sa.menu.category.model;
+package com.green.ca2sa.cafe.category.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class MenuCategoryPostReq {
+public class CafeCategoryPostReq {
     private long cafeId;
     private String categoryName;
 }
