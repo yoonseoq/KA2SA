@@ -22,7 +22,7 @@ public class MenuService {
     private final MyFileUtils myFileUtils;
 
 
-    // ❗❗12월23일 마지막)  Post 다시 하기. mapper.postCategoryInfo(p.getCategory()); 이거 한 후에, categoryId 를 얻어오지 못하고 있음. ❗❗
+
 
 
     @Transactional
