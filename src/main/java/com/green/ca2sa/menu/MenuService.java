@@ -3,14 +3,12 @@ package com.green.ca2sa.menu;
 import com.green.ca2sa.common.MyFileUtils;
 import com.green.ca2sa.menu.model.*;
 import com.green.ca2sa.menu.option.MenuOptionMapper;
-import com.green.ca2sa.menu.option.model.MenuOptionPutReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +22,7 @@ public class MenuService {
     public int postMenuInfo(MultipartFile pic, MenuPostReq p) {
 
         // 사진 null 체크
-        if(pic==null){
+        if (pic == null) {
             return mapper.postMenuInfo(p);
         }
 
@@ -50,6 +48,12 @@ public class MenuService {
 
     public List<MenuGetRes> getMenuInfo(MenuGetReq p) {
         return mapper.getMenuInfo(p);
+    }
+
+    @Transactional
+    public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
+        List<MenuDetailGetRes> res = mapper.getMenuDetailInfo(p);
+        return res;
     }
 
     @Transactional
@@ -87,13 +91,5 @@ public class MenuService {
         myFileUtils.deleteFolder(deletePath, true);
 
         return mapper.deleteMenuInfo(p);
-
-
-    }
-
-    @Transactional
-    public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
-        List<MenuDetailGetRes> res = mapper.getMenuDetailInfo(p);
-        return res;
     }
 }

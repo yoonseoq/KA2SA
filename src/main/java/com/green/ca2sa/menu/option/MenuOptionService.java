@@ -1,6 +1,5 @@
 package com.green.ca2sa.menu.option;
 
-import com.green.ca2sa.common.MyFileUtils;
 import com.green.ca2sa.menu.option.model.MenuOptionPostReq;
 import com.green.ca2sa.menu.option.model.MenuOptionPutReq;
 import lombok.RequiredArgsConstructor;

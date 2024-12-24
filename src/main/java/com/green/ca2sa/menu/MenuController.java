@@ -24,9 +24,9 @@ public class MenuController {
     public ResultResponse<Integer> postMenuInfo(@RequestPart MultipartFile pic, @RequestPart MenuPostReq p) {
         Integer result = service.postMenuInfo(pic, p);
         return ResultResponse.<Integer>builder()
-                             .resultMessage("메뉴 등록 완료")
-                             .resultData(result)
-                             .build();
+                .resultMessage("메뉴 등록 완료")
+                .resultData(result)
+                .build();
     }
 
     @GetMapping
@@ -34,9 +34,9 @@ public class MenuController {
     public ResultResponse<List<MenuGetRes>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
         List<MenuGetRes> result = service.getMenuInfo(p);
         return ResultResponse.<List<MenuGetRes>>builder()
-                             .resultMessage("메뉴 출력 완료")
-                             .resultData(result)
-                             .build();
+                .resultMessage("메뉴 출력 완료")
+                .resultData(result)
+                .build();
     }
 
     @PatchMapping
@@ -54,9 +54,9 @@ public class MenuController {
     public ResultResponse<Integer> deleteMenuInfo(@ParameterObject @ModelAttribute MenuDelReq p) {
         Integer result = service.deleteMenuInfo(p);
         return ResultResponse.<Integer>builder()
-                             .resultMessage("메뉴 삭제 완료")
-                             .resultData(result)
-                             .build();
+                .resultMessage("메뉴 삭제 완료")
+                .resultData(result)
+                .build();
     }
 
     @GetMapping("detail")

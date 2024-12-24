@@ -13,6 +13,4 @@ public class MenuOptionPutReq {
     private String optionName;
     @Schema(title = "옵션 가격", example = "500", requiredMode = Schema.RequiredMode.REQUIRED)
     private int addPrice;
-    @Schema(title = "필수 옵션", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
-    private int required;
 }

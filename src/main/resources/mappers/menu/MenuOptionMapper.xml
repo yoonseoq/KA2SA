@@ -6,8 +6,7 @@
         INSERT INTO menu_option
         SET menuId = #{menuId},
         optionName = #{optionName},
-        addPrice = #{addPrice},
-        required = #{required}
+        addPrice = #{addPrice}
     </insert>
 
     <update id = "updateMenuOptionInfo">
@@ -17,10 +16,7 @@
                 optionName = #{optionName},
             </if>
             <if test=" addPrice != null">
-                addPrice = #{addPrice},
-            </if>
-            <if test=" required != null">
-                required = #{required}
+                addPrice = #{addPrice}
             </if>
         </set>
         WHERE menuId = #{menuId}
