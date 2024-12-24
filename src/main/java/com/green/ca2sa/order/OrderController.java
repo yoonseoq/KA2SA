@@ -18,12 +18,12 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RequestMapping("order")
-@Tag(name = "주문 관련")
+@Tag(name = "주문 관리")
 public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    @Operation(description = "주문 하기")
+    @Operation(summary = "주문 하기")
     public ResultResponse<Integer> postOrder(@RequestBody OrderPostReq p) {
         int result = orderService.PostOrder(p);
         log.info("OrderController > postOrder > req: {}", p);
@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @GetMapping
-    @Operation(description = "주문 확인")
+    @Operation(summary = "주문 조회")
     public ResultResponse<List<OrderGetRes>> getOrderList(@ParameterObject @ModelAttribute OrderGetReq p) {
         List<OrderGetRes> list = orderService.GetOrderList(p);
         return ResultResponse.<List<OrderGetRes>>builder()
@@ -43,8 +43,8 @@ public class OrderController {
                 .build();
     }
 
-    @PatchMapping
-    @Operation(description = "주문 취소 신청")
+    @PatchMapping("cancel")
+    @Operation(summary = "주문 취소")
     public ResultResponse<Integer> cancelOrder(@ParameterObject @ModelAttribute OrderCancelReq p){
         log.info("OrderController > cancelOrder > req: {}", p);
         return ResultResponse.<Integer>builder()

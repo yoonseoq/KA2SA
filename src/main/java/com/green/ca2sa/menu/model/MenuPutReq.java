@@ -13,7 +13,7 @@ public class MenuPutReq {
     private String menuName;
     @Schema(title = "메뉴 가격", example = "2000", requiredMode = Schema.RequiredMode.REQUIRED)
     private int price;
-    @Schema(title = "메뉴 설명", example = "진하고 고소한 커피")
+    @Schema(title = "메뉴 설명", example = "BTS 진하고 고소장 제출한 커피")
     private String comment;
 
     @JsonIgnore
