@@ -3,6 +3,7 @@ package com.green.ca2sa.user;
 import com.green.ca2sa.common.model.ResultResponse;
 import com.green.ca2sa.user.model.*;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("user")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "회원 관리")
+
 public class UserController {
     private final UserService service;
 

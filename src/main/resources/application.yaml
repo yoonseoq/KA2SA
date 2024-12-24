@@ -49,3 +49,4 @@ springdoc:
     tags-sorter: alpha
   cache:
     disabled: true
+
