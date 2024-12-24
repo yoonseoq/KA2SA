@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -61,6 +62,7 @@ public class CafeService {
 
 
     // 카페 정보 변경
+    @Transactional
     public int updCafe(MultipartFile pic, CafePutReq p){
         String fileName = pic != null ? myFileUtils.makeRandomFileName(pic) : null;
         long cafeId = p.getCafeId();
@@ -68,7 +70,7 @@ public class CafeService {
         myFileUtils.makeFolders(folderPath);
         p.setCafePic(fileName);
 
-        String deletePath = String.format("%s/cafe/%d",myFileUtils.getUploadPath(),cafeId);
+        String deletePath = String.format("cafe/%d",cafeId);
         myFileUtils.deleteFolder(deletePath,false);
 
         if(p.getCafePic() == null){
