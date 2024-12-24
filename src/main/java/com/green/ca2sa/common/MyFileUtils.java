@@ -45,17 +45,17 @@ public class MyFileUtils {
         File dir = new File(uploadPath, path);
         if (dir.exists() && dir.isDirectory()) {
             File[] includedFiles = dir.listFiles();
-            for (File file : includedFiles) {
-                if (file.isDirectory()) {
-//                    Path filePath = Paths.get(file.getAbsolutePath());
-                    return deleteFolder(file.getPath(), true);
-//                    return deleteFolder(filePath.subpath(3, filePath.getNameCount()).toString(), true);
-                } else{
+            if (includedFiles != null) {
+                for (File file : includedFiles) {
+                    if (file.isDirectory()) {
+//                        Path filePath = Paths.get(file.getAbsolutePath());
+//                        return deleteFolder(filePath.subpath(3, filePath.getNameCount()).toString(), true);
+                        return deleteFolder(file.getPath(), true);
+                    }
                     if(!file.delete()) {
-                        System.out.println("파일삭제실패");
+                        return false;
                     }
                 }
-//                return file.delete();
             }
             if (delRootFolder) {
                 return dir.delete();
@@ -63,6 +63,7 @@ public class MyFileUtils {
         }
         return false;
     }
+
 
     public void transferTo(MultipartFile mf, String path) throws IOException {
         File file = new File(uploadPath, path);
