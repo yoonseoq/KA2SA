@@ -20,7 +20,7 @@ public class MenuController {
 
     @PostMapping
     @Operation(summary = "Menu 등록하기")
-    public ResultResponse<Integer> postMenuInfo(@RequestPart MultipartFile pic, @RequestPart MenuPostReq p) {
+    public ResultResponse<Integer> postMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPostReq p) {
         Integer result = service.postMenuInfo(pic, p);
         return ResultResponse.<Integer>builder()
                              .resultMessage("메뉴 등록 완료")
@@ -28,16 +28,18 @@ public class MenuController {
                              .build();
     }
 
+    // getMenuInfo 완료 -  12월23일
     @GetMapping
     @Operation(summary = "Menu 가져오기")
-    public ResultResponse<List<MenuGetRes>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
-        List<MenuGetRes> result = service.getMenuInfo(p);
-        return ResultResponse.<List<MenuGetRes>>builder()
+    public ResultResponse<List<MenuGetDto>> getMenuInfo(@ParameterObject @ModelAttribute MenuGetReq p) {
+        List<MenuGetDto> result = service.getMenuInfo(p);
+        return ResultResponse.<List<MenuGetDto>>builder()
                              .resultMessage("메뉴 출력 완료")
                              .resultData(result)
                              .build();
     }
 
+    // 수정하기는 건들지 말기(수영이 햇다함)
     @PutMapping
     @Operation(summary = "Menu 수정하기")
     public ResultResponse<Integer> updateMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPutReq p) {
@@ -48,6 +50,7 @@ public class MenuController {
                 .build();
     }
 
+    // 건들지 말기
     @DeleteMapping
     @Operation(summary = "Menu 삭제하기", description = "메뉴의 옵션 모두 삭제 처리")
     public ResultResponse<Integer> deleteMenuInfo(@ParameterObject @ModelAttribute MenuDelReq p) {
@@ -58,6 +61,8 @@ public class MenuController {
                              .build();
     }
 
+
+    // getMenuDetailInfo 완료됨
     @GetMapping("detail")
     @Operation(summary = "Menu 상세 정보 불러오기")
     public ResultResponse<List<MenuDetailGetRes>> getMenuDetailInfo(@ParameterObject @ModelAttribute MenuDetailGetReq p) {
