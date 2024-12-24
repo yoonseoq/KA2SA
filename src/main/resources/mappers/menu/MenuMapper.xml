@@ -8,28 +8,46 @@
         menuName = #{menuName},
         price = #{price},
         comment = #{comment},
-        menuPic = #{menuPic}
+        menuPic = #{menuPic},
+        categoryId=#{categoryId}
     </insert>
 
+
+
+
+
     <select id = "getMenuInfo">
-        SELECT `menuId`, `menuName`, `price`, `comment`, menuPic
-        FROM menu
+        SELECT a.menuId, a.menuName, a.price, a.comment, a.menuPic, b.category
+        FROM menu a
+        LEFT JOIN category b
+        ON a.categoryId=b.categoryId
         WHERE cafeId = #{cafeId}
+    </select>
+
+    <select id="getMenuDetailInfo">
+        SELECT a.menuName,a.price,a.comment,a.menuPic,b.optionName,b.addPrice,b.required
+        FROM menu a
+        LEFT JOIN menu_option b
+        on a.menuId=b.menuId
+        WHERE a.menuId=#{menuId}
     </select>
 
     <update id = "updateMenuInfo">
         UPDATE menu
         <set>
+            <if test =" categoryId != null and categoryId != '' ">
+                categoryId = #{categoryId}
+            </if>
             <if test=" menuName !=null and menuName != '' ">
                 menuName = #{menuName},
             </if>
-            <if test=" price !=null and price != '' ">
+            <if test=" price !=null">
                 price = #{price},
             </if>
-            <if test=" comment  !=null and comment != '' ">
+            <if test=" comment !=null and comment != '' ">
                 comment = #{comment},
             </if>
-            <if test=" menuPic  !=null and menuPic != '' ">
+            <if test=" menuPic !=null and menuPic != '' ">
                 menuPic = #{menuPic},
             </if>
         </set>
@@ -40,12 +58,6 @@
         DELETE
         FROM menu
         WHERE menuId = #{menuId}
+        AND cafeId=#{cafeId}
     </delete>
-    <select id="getMenuDetailInfo">
-        SELECT a.menuName,a.price,a.comment,a.menuPic,b.optionName,b.addPrice,b.required
-        FROM menu a
-        LEFT JOIN menu_option b
-        on a.menuId=b.menuId
-        WHERE a.menuId=#{menuId}
-    </select>
 </mapper>

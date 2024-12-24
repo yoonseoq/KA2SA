@@ -24,7 +24,6 @@ public class CafeSignUpReq {
     private String apw;
     @Schema(title = "사업자번호", example = "12245678910", requiredMode = Schema.RequiredMode.REQUIRED)
     private String businessNumber;
-    @Schema(title = "동의여부", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private int agree;
     @JsonIgnore
     private String cafePic;
