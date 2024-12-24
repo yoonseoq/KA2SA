@@ -22,6 +22,7 @@ public class MenuService {
 
     @Transactional
     public int postMenuInfo(MultipartFile pic, MenuPostReq p) {
+        mapper.postMenuCategoryInfo(p);
 
         // 사진 null 체크
         if (pic == null) {
@@ -44,7 +45,7 @@ public class MenuService {
         try {
             myFileUtils.transferTo(pic, filePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return result;
     }
@@ -74,7 +75,7 @@ public class MenuService {
         try {
             myFileUtils.transferTo(pic, filePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return result;
     }
@@ -82,7 +83,7 @@ public class MenuService {
     @Transactional
     public int deleteMenuInfo(MenuDelReq p) {
 
-        int result = optionMapper.deleteMenuOption(p.getMenuId());
+        optionMapper.deleteMenuOption(p.getMenuId());
 
         String deletePath = String.format("cafe/%d/menu/%d", p.getCafeId(), p.getMenuId());
         myFileUtils.deleteFolder(deletePath, true);
@@ -92,9 +93,8 @@ public class MenuService {
 
     @Transactional
     public List<MenuDetailGetRes> getMenuDetailInfo(MenuDetailGetReq p) {
-        List<MenuDetailGetRes> res= mapper.getMenuDetailInfo(p);
 
-        return res;
+        return mapper.getMenuDetailInfo(p);
     }
 
 
