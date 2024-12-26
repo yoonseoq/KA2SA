@@ -17,4 +17,6 @@ public class CafePutReq {
     private String closeTime;
     private String openTime;
     private long cafeId;
+    private double latitude;
+    private double longitude;
 }

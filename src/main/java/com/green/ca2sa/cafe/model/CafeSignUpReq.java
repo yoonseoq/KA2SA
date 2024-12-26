@@ -17,6 +17,8 @@ public class CafeSignUpReq {
     private String apw;
     private String businessNumber;
     private int agree;
+    private double latitude;
+    private double longitude;
     @JsonIgnore
     private String cafePic;
     @JsonIgnore
