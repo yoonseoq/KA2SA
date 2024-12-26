@@ -16,7 +16,6 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("menu")
-@Tag(name = "메뉴 관련")
 public class MenuController {
     private final MenuService service;
 
