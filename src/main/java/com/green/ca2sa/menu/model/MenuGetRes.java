@@ -10,5 +10,5 @@ import java.util.List;
 @Getter
 public class MenuGetRes {
    private List<MenuGetDto> menu;
-   private String category;
+   private long categoryId;
 }

@@ -46,7 +46,7 @@ public class MenuController {
     }
 
     // 수정하기는 건들지 말기(수영이 햇다함)
-    @PutMapping
+    @PatchMapping
     @Operation(summary = "Menu 수정하기")
     public ResultResponse<Integer> updateMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPutReq p) {
         int result = service.updateMenuInfo(pic, p);
