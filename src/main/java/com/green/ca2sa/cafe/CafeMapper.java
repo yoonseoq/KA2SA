@@ -13,4 +13,6 @@ public interface CafeMapper {
     int insCafe(CafeSignUpReq p);
     CafeSignInRes signInCafe(String email);
     List<CafeGetSalesDto> selSumPriceWeekOfDay(CafeGetSalesReq p);
+    CafeGetDistanceRes selCafeDistance(CafeGetDistanceReq p);
+    List<CafeGetAllRes> selAllCafe(CafeGetAllReq p);
 }
