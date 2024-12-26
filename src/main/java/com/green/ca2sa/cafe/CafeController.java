@@ -10,6 +10,8 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/cafe")
@@ -52,12 +54,20 @@ public class CafeController {
                 .resultMessage(res == 0 ? "중복된 이메일입니다." : "이메일 확인 완료")
                 .build();
     }
-
+    @GetMapping("map")
+    @Operation(summary = "지도에서 모든 카페 조회")
+    public ResultResponse<List<CafeGetAllRes>> getAllCafe(@ParameterObject @ModelAttribute CafeGetAllReq p){
+        List<CafeGetAllRes> res = cafeService.selAllCafe(p);
+        return ResultResponse.<List<CafeGetAllRes>>builder()
+                .resultData(res)
+                .resultMessage("조회 완료")
+                .build();
+    }
     @GetMapping
     @Operation(summary = "카페 정보 조회")
-    public ResultResponse<CafeGetRes> getCafe(@ParameterObject @ModelAttribute CafeGetReq p) {
-        CafeGetRes res = cafeService.selCafe(p);
-        return ResultResponse.<CafeGetRes>builder()
+    public ResultResponse<CafeGetDistanceRes> getCafe(@ParameterObject @ModelAttribute CafeGetDistanceReq p) {
+        CafeGetDistanceRes res = cafeService.selCafeDistance(p);
+        return ResultResponse.<CafeGetDistanceRes>builder()
                 .resultData(res)
                 .resultMessage("카페 정보 조회 완료")
                 .build();
