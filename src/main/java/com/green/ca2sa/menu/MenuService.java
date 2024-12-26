@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -49,8 +52,69 @@ public class MenuService {
         return result;
     }
 
-    public List<MenuGetDto> getMenuInfo(MenuGetReq p) {
-        return mapper.getMenuInfo(p);
+    public  List<MenuGetRes> getMenuInfo(MenuGetReq p) {
+        // 데이터 조회
+        List<MenuGetDto> list = mapper.getMenuInfo(p);
+
+        // 카테고리별로 메뉴를 그룹화
+        Map<String, List<MenuGetDto>> groupedByCategory = new HashMap<>();
+
+        for (MenuGetDto dto : list) {
+            groupedByCategory
+                    .computeIfAbsent(dto.getCategoryName(), k -> new ArrayList<>())
+                    .add(dto);
+        }
+
+        // 결과 데이터 생성
+        List<MenuGetRes> res = new ArrayList<>();
+
+        for (Map.Entry<String, List<MenuGetDto>> entry : groupedByCategory.entrySet()) {
+            MenuGetRes resDto = new MenuGetRes();
+            resDto.setCategoryName(entry.getKey());
+            resDto.setMenu(entry.getValue()); // 메뉴 리스트 추가
+            res.add(resDto);
+        }
+
+        return res;
+
+
+
+
+
+
+
+
+//        List<MenuGetDto> list=mapper.getMenuInfo(p);
+//
+//        List<MenuGetRes> res= new ArrayList<>();
+//
+//
+//        for(MenuGetDto dto:list){
+//            MenuGetRes resDto=new MenuGetRes();
+//            resDto.setCategoryName(dto.getCategoryName());
+//            resDto.getMenu().add(dto);
+//            res.add(resDto);
+//        }
+//
+//        return res;
+
+
+
+//        List<Map<String,Object>> result=new ArrayList<>();
+//
+//        Map<String,Object> map=new HashMap<>();
+//
+//        for(MenuGetDto dto:list){
+//            map.put("category",dto.getCategoryName());
+//
+//            MenuGetDto2 dto2=new MenuGetDto2();
+//            dto2.setMenuId(dto.getMenuId());
+//            dto2.setMenuName(dto.getMenuName());
+//            dto2.setMenuPic(dto.getMenuPic());
+//            dto2.setPrice(dto.getPrice());
+//
+//            map.put("menu",dto2);
+
     }
 
     @Transactional

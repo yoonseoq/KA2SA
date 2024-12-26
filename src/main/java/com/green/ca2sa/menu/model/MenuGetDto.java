@@ -1,5 +1,6 @@
 package com.green.ca2sa.menu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,5 +13,6 @@ public class MenuGetDto { // MenuGetRes 멤버필드 list 에 들어가는 객�
     private int price;
     private String comment;
     private String menuPic;
-    private String category;
+    @JsonIgnore
+    private String categoryName;
 }

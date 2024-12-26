@@ -17,11 +17,11 @@
 
 
     <select id = "getMenuInfo">
-        SELECT a.menuId, a.menuName, a.price, a.comment, a.menuPic, b.category
+        SELECT a.menuId, a.menuName, a.price, a.`comment`, a.menuPic, b.categoryName
         FROM menu a
         LEFT JOIN category b
-        ON a.categoryId=b.categoryId
-        WHERE cafeId = #{cafeId}
+        on a.categoryId=b.categoryId
+        WHERE a.cafeId = #{cafeId}
     </select>
 
     <select id="getMenuDetailInfo">
