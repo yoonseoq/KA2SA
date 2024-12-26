@@ -11,13 +11,13 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CafeCategoryService {
-    private final CafeCategoryMapper menuCategoryMapper;
+    private final CafeCategoryMapper CategoryMapper;
 
     public int postCategory(CafeCategoryPostReq p) {
-        return menuCategoryMapper.insCategory(p);
+        return CategoryMapper.insCategory(p);
     }
 
     public List<CafeCategoryGetRes> getMenuCategory(CafeCategoryGetReq p) {
-        return menuCategoryMapper.getMenuCategory(p);
+        return CategoryMapper.getMenuCategory(p);
     }
 }

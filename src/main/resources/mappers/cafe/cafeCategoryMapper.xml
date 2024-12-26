@@ -6,7 +6,7 @@
     <insert id="insCategory">
         INSERT INTO category
         SET cafeId = #{cafeId},
-        categoryName=#{categoryName}
+        categoryName = #{categoryName}
     </insert>
 
     <select id="getMenuCategory">

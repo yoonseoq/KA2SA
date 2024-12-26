@@ -9,23 +9,19 @@
         price = #{price},
         comment = #{comment},
         menuPic = #{menuPic},
-        categoryId=#{categoryId}
+        categoryId = #{categoryId}
     </insert>
 
-
-
-
-
     <select id = "getMenuInfo">
-        SELECT a.menuId, a.menuName, a.price, a.`comment`, a.menuPic, b.categoryName
-        FROM menu a
-        LEFT JOIN category b
-        on a.categoryId=b.categoryId
-        WHERE a.cafeId = #{cafeId}
+        SELECT A.menuId, A.menuName, A.price, A.comment, A.menuPic, B.categoryId
+        FROM menu A
+        LEFT JOIN category B
+        ON A.categoryId = B.categoryId
+        WHERE A.cafeId = #{cafeId}
     </select>
 
     <select id="getMenuDetailInfo">
-        SELECT a.menuName,a.price,a.comment,a.menuPic,b.optionName,b.addPrice,b.required
+        SELECT a.menuName,a.price,a.comment,a.menuPic,b.optionName,b.addPrice
         FROM menu a
         LEFT JOIN menu_option b
         on a.menuId=b.menuId
@@ -35,8 +31,8 @@
     <update id = "updateMenuInfo">
         UPDATE menu
         <set>
-            <if test =" categoryId != null and categoryId != '' ">
-                categoryId = #{categoryId}
+            <if test =" categoryId != null">
+                categoryId = #{categoryId},
             </if>
             <if test=" menuName !=null and menuName != '' ">
                 menuName = #{menuName},
@@ -52,6 +48,7 @@
             </if>
         </set>
         WHERE cafeId = #{cafeId}
+        AND menuId = #{menuId}
     </update>
 
     <delete id = "deleteMenuInfo">

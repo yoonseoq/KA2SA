@@ -17,6 +17,7 @@ import java.util.List;
 @Tag(name = "카테고리 관리")
 public class CafeCategoryController {
     private final CafeCategoryService menuCategoryService;
+
     @PostMapping
     public ResultResponse<Integer> postCategory(@RequestBody CafeCategoryPostReq p) {
         return ResultResponse.<Integer> builder()

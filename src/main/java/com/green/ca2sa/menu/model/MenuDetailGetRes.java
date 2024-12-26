@@ -12,5 +12,4 @@ public class MenuDetailGetRes {
     private String menuPic;
     private String optionName;
     private int addPrice;
-    private int required;
 }
