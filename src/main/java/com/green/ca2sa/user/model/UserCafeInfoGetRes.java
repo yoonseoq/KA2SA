@@ -10,4 +10,6 @@ public class UserCafeInfoGetRes {
     private String cafeName;
     private String cafePic;
     private String location;
+    private double distance;
+
 }
