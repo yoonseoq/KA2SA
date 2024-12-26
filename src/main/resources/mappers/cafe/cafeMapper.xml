@@ -24,6 +24,12 @@
             <if test="openTime != null and openTime != ''">
                 ,openTime = #{openTime}
             </if>
+            <if test="longitude != null">
+                ,longitude = #{longitude}
+            </if>
+            <if test="latitude != null">
+                ,latitude = #{latitude}
+            </if>
         </set>
         where cafeId = #{cafeId}
     </update>
@@ -49,13 +55,9 @@
         set
 
         cafeName = #{cafeName}, location = #{location}, tel = #{tel}, cafePic = #{cafePic},
-
-            closeTime = #{closeTime},
-
-            openTime = #{openTime},
-
-        email = #{email},
-        apw = #{apw}, businessNumber = #{businessNumber}, agree = #{agree}
+        closeTime = #{closeTime}, openTime = #{openTime}, email = #{email},
+        apw = #{apw}, businessNumber = #{businessNumber}, agree = #{agree},
+        latitude = #{latitude}, longitude = #{longitude}
 
     </insert>
 
