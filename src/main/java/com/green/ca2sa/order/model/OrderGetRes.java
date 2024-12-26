@@ -1,17 +1,13 @@
 package com.green.ca2sa.order.model;
 
 import com.green.ca2sa.order.orderMenu.model.OrderMenuDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
-@Builder
 @Getter
 @ToString
+@Setter
 public class OrderGetRes {
     private long orderId;
     private String nickName;
@@ -21,6 +17,6 @@ public class OrderGetRes {
     private String createdAt;
     private String memo;
     private int orderProgress;
-
     private List<OrderMenuDto> orderMenuList;
+
 }

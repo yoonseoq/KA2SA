@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.BindParam;
 @Setter
 @ToString(callSuper = true)
 public class OrderGetReq extends Paging {
-    @Schema(title = "고객 유저 PK",name = "signed_user_id",requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "고객 유저 PK",name = "signed_user_id")
     private Long signedUserId;
-    @Schema(title = "카페 관리자 PK",name = "cafe_admin_id",requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "카페 관리자 PK",name = "cafe_admin_id")
     private Long cafeAdminId;
 
 

@@ -6,8 +6,6 @@ import com.green.ca2sa.order.model.OrderGetRes;
 import com.green.ca2sa.order.model.OrderPostReq;
 import com.green.ca2sa.order.orderMenu.OrderMenuMapper;
 import com.green.ca2sa.order.orderMenu.OrderMenuOptionMapper;
-import com.green.ca2sa.order.orderMenu.model.OrderMenuDto;
-import com.green.ca2sa.order.orderMenu.model.OrderMenuOptionDto;
 import com.green.ca2sa.order.orderMenu.model.OrderMenuOptionPostReq;
 import com.green.ca2sa.order.orderMenu.model.OrderMenuPostReq;
 import lombok.RequiredArgsConstructor;
@@ -54,62 +52,8 @@ public class OrderService {
     }
 
     public List<OrderGetRes> GetOrderList(OrderGetReq p) {
-        long startTime = System.currentTimeMillis();
-        log.info("OrderGetReq:{}", p);
-        List<OrderGetRes> orderList = orderMapper.getOrderList(p); // 일단 주문목록 조회
-        log.info("order list from mapper : {}", orderList);
 
-        Map<Long, OrderGetRes> orderMap = new HashMap<>();
-        for (OrderGetRes order : orderList) {
-            OrderGetRes orderDto = orderMap.computeIfAbsent(order.getOrderId(), key ->
-                    OrderGetRes.builder()
-                        .orderId(order.getOrderId())
-                        .nickName(order.getNickName())
-                        .cafeName(order.getCafeName())
-                        .location(order.getLocation())
-                        .pickUpTime(order.getPickUpTime())
-                        .memo(order.getMemo())
-                        .createdAt(order.getCreatedAt())
-                        .orderMenuList(new LinkedList<>())
-                        .build()
-            );
-
-            if (order.getOrderMenuList() != null) {
-                for (OrderMenuDto orderMenu : order.getOrderMenuList()) {
-                    OrderMenuDto menuDto = orderDto.getOrderMenuList().stream()
-                            .filter(m -> m.getOrderMenuId() == orderMenu.getOrderMenuId())
-                            .findFirst().orElseGet(() ->
-                                OrderMenuDto.builder()
-                                        .orderMenuId(orderMenu.getOrderMenuId())
-                                        .menuName(orderMenu.getMenuName())
-                                        .price(orderMenu.getPrice())
-                                        .count(orderMenu.getCount())
-                                        .orderMenuOptions(new LinkedList<>())
-                                        .build()
-                            );
-
-                    if (orderMenu.getOrderMenuOptions() != null) {
-                        for (OrderMenuOptionDto optionDto : orderMenu.getOrderMenuOptions()) {
-                            // 중복된 옵션이 없을 경우에만 추가
-                            boolean exists = menuDto.getOrderMenuOptions().stream()
-                                    .anyMatch(o -> Objects.equals(o.getMenuOptionId(), optionDto.getMenuOptionId()));
-                            if (!exists) {
-                                menuDto.getOrderMenuOptions().add(
-                                        OrderMenuOptionDto.builder()
-                                                .menuOptionId(optionDto.getMenuOptionId())
-                                                .optionName(optionDto.getOptionName())
-                                                .addPrice(optionDto.getAddPrice())
-                                                .required(optionDto.getRequired())
-                                                .build()
-                                );
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        log.info("get order list process cost time:{}", System.currentTimeMillis() - startTime);
-        return new ArrayList<>(orderMap.values());
+        return orderMapper.getOrderList(p);
     }
 
     public int cancelOrder(OrderCancelReq p){
