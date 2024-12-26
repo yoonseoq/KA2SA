@@ -11,5 +11,4 @@ public class MenuDetailGetReq {
     private long menuId;
 //    @Schema(title = "카페 ID", example = "2", requiredMode = Schema.RequiredMode.REQUIRED)
 //    private long cafeId;
-
 }

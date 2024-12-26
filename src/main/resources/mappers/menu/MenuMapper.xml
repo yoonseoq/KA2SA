@@ -12,6 +12,12 @@
         categoryId = #{categoryId}
     </insert>
 
+    <select id = "existsMenu" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM menu
+        WHERE cafeId = #{cafeId} AND menuName = #{menuName}
+    </select>
+
     <select id = "getMenuInfo">
         SELECT A.menuId, A.menuName, A.price, A.comment, A.menuPic, B.categoryId
         FROM menu A
@@ -44,7 +50,7 @@
                 comment = #{comment},
             </if>
             <if test=" menuPic !=null and menuPic != '' ">
-                menuPic = #{menuPic},
+                menuPic = #{menuPic}
             </if>
         </set>
         WHERE cafeId = #{cafeId}
