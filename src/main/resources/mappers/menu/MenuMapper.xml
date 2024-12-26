@@ -9,12 +9,8 @@
         price = #{price},
         comment = #{comment},
         menuPic = #{menuPic},
-        categoryId=#{categoryId}
+        categoryId = #{categoryId}
     </insert>
-
-
-
-
 
     <select id = "getMenuInfo">
         SELECT a.menuId, a.menuName, a.price, a.comment, a.menuPic, b.category

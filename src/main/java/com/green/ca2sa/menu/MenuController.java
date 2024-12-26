@@ -1,10 +1,12 @@
 package com.green.ca2sa.menu;
 
+import com.green.ca2sa.cafe.category.model.CafeCategoryPostReq;
 import com.green.ca2sa.common.model.ResultResponse;
 import com.green.ca2sa.menu.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,15 +18,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("menu")
 @Tag(name = "메뉴 관련")
+@Slf4j
 public class MenuController {
     private final MenuService service;
-
 
     // postMenuInfo 완료- 12월 24일
     @PostMapping
     @Operation(summary = "Menu 등록하기")
     public ResultResponse<Integer> postMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPostReq p) {
         Integer result = service.postMenuInfo(pic, p);
+        log.info("p: {}",p);
         return ResultResponse.<Integer>builder()
                 .resultMessage("메뉴 등록 완료")
                 .resultData(result)
