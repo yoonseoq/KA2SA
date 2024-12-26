@@ -12,8 +12,8 @@ import java.util.List;
 public class OrderMenuDto {
     private long orderMenuId;
     private String orderMenuName;
-    private Integer price;
-    private Integer count;
+    private int price;
+    private int count;
     List<OrderMenuOptionDto> options;
 
 }

@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class OrderMenuOptionDto {
-    private Long menuOptionId;
+    private long menuOptionId;
     private String optionName;
     private int addPrice;
 
