@@ -19,17 +19,23 @@ public class CafeCategoryController {
     private final CafeCategoryService menuCategoryService;
 
     @PostMapping
-    public ResultResponse<Integer> postCategory(@RequestBody CafeCategoryPostReq p) {
-        return ResultResponse.<Integer> builder()
-                .resultMessage("카테고리 등록 성공")
-                .resultData(menuCategoryService.postCategory(p))
-                .build();
+    public ResultResponse<Integer> postCategoryInfo(@RequestBody CafeCategoryPostReq p) {
+        try {
+            return ResultResponse.<Integer>builder()
+                    .resultMessage("카테고리 등록 완료")
+                    .resultData(menuCategoryService.postCategoryInfo(p))
+                    .build();
+        } catch (IllegalArgumentException e) {
+            return  ResultResponse.<Integer>builder()
+                    .resultMessage(e.getMessage())
+                    .build();
+        }
     }
 
     @GetMapping
     public ResultResponse<List<CafeCategoryGetRes>> getCategories(@ParameterObject @ModelAttribute CafeCategoryGetReq p) {
         return ResultResponse.<List<CafeCategoryGetRes>>builder()
-                .resultMessage("카테고리 조회")
+                .resultMessage("카테고리 조회 완료")
                 .resultData(menuCategoryService.getMenuCategory(p))
                 .build();
     }

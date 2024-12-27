@@ -9,6 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface CafeCategoryMapper {
-    int insCategory(CafeCategoryPostReq p);
+    int postCategoryInfo(CafeCategoryPostReq p);
+    int existsCategory(long cafeId, String categoryName);
     List<CafeCategoryGetRes> getMenuCategory(CafeCategoryGetReq p);
 }

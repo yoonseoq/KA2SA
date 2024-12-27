@@ -19,7 +19,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("menu")
 @Tag(name = "메뉴 관련")
-@Slf4j
 public class MenuController {
     private final MenuService service;
 
@@ -28,12 +27,17 @@ public class MenuController {
     @PostMapping
     @Operation(summary = "Menu 등록하기")
     public ResultResponse<Integer> postMenuInfo(@RequestPart(required = false) MultipartFile pic, @RequestPart MenuPostReq p) {
-        Integer result = service.postMenuInfo(pic, p);
-        log.info("p: {}",p);
-        return ResultResponse.<Integer>builder()
-                .resultMessage("메뉴 등록 완료")
-                .resultData(result)
-                .build();
+        try {
+            Integer result = service.postMenuInfo(pic, p);
+            return ResultResponse.<Integer>builder()
+                    .resultMessage("메뉴 등록 완료")
+                    .resultData(result)
+                    .build();
+        } catch (IllegalArgumentException e) {
+            return ResultResponse.<Integer>builder()
+                    .resultMessage(e.getMessage())
+                    .build();
+        }
     }
 
     // getMenuInfo 수정하기. 수정 완료   12.26

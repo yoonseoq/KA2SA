@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.ca2sa.cafe.CafeMapper">
     <update id="updCafe">
-        update cafe
+        UPDATE cafe
         <set>
             <if test="cafeName != null and cafeName != ''">
                 cafeName = #{cafeName}
@@ -31,19 +31,19 @@
                 ,latitude = #{latitude}
             </if>
         </set>
-        where cafeId = #{cafeId}
+        WHERE cafeId = #{cafeId}
     </update>
 
     <update id="updCafeOrder">
-        update `order`
-        set orderProgress = #{orderProgress}
-        where orderId = #{orderId}
+        UPDATE `order`
+        SET orderProgress = #{orderProgress}
+        WHERE orderId = #{orderId}
     </update>
 
     <select id="selCafe">
-        select cafeName, location, tel, cafePic, openTime, closeTime
-        from cafe
-        where cafeId = #{cafeId}
+        SELECT cafeName, location, tel, cafePic, openTime, closeTime
+        FROM cafe
+        WHERE cafeId = #{cafeId}
     </select>
     <select id="cafeEmailCheck">
         SELECT email
@@ -51,8 +51,8 @@
         WHERE email =#{email}
     </select>
     <insert id="insCafe" useGeneratedKeys="true" keyProperty="cafeId">
-        insert into cafe
-        set
+        INSERT INTO cafe
+        SET
 
         cafeName = #{cafeName}, location = #{location}, tel = #{tel}, cafePic = #{cafePic},
         closeTime = #{closeTime}, openTime = #{openTime}, email = #{email},
@@ -62,9 +62,9 @@
     </insert>
 
     <select id="signInCafe">
-        select cafeId, apw, email
-        from cafe
-        where email = #{email}
+        SELECT cafeId, apw, email
+        FROM cafe
+        WHERE email = #{email}
     </select>
 
     <select id="selSumPriceWeekOfDay">

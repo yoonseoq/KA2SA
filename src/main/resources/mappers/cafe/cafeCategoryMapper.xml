@@ -3,11 +3,17 @@
 
 <mapper namespace="com.green.ca2sa.cafe.category.CafeCategoryMapper">
 
-    <insert id="insCategory">
+    <insert id="postCategoryInfo">
         INSERT INTO category
         SET cafeId = #{cafeId},
         categoryName = #{categoryName}
     </insert>
+
+    <select id="existsCategory" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM category
+        WHERE cafeId = #{cafeId} AND categoryName = #{categoryName}
+    </select>
 
     <select id="getMenuCategory">
         SELECT categoryId, categoryName
