@@ -1,8 +1,6 @@
 package com.green.ca2sa.menu;
 
 import com.green.ca2sa.cafe.category.CafeCategoryMapper;
-import com.green.ca2sa.cafe.category.model.CafeCategoryGetRes;
-import com.green.ca2sa.cafe.category.model.CafeCategoryPostReq;
 import com.green.ca2sa.common.MyFileUtils;
 import com.green.ca2sa.menu.model.*;
 import com.green.ca2sa.menu.option.MenuOptionMapper;
@@ -24,7 +22,6 @@ import java.util.Map;
 public class MenuService {
     private final MenuMapper mapper;
     private final MenuOptionMapper optionMapper;
-    private final CafeCategoryMapper cafeCategoryMapper;
     private final MyFileUtils myFileUtils;
 
     @Transactional
@@ -34,10 +31,14 @@ public class MenuService {
         if (pic == null) {
             return mapper.postMenuInfo(p);
         }
-
         //메뉴 사진 req 객체에 넣기
         String savedPicName = myFileUtils.makeRandomFileName(pic);
         p.setMenuPic(savedPicName);
+
+        int exists = mapper.existsMenu(p.getCafeId(), p.getMenuName());
+        if (exists > 0) {
+            throw new IllegalArgumentException("이미 존재하는 메뉴입니다.");
+        }
 
         int result = mapper.postMenuInfo(p);
         long menuId = p.getMenuId();
@@ -122,6 +123,7 @@ public class MenuService {
 
     @Transactional
     public int updateMenuInfo(MultipartFile pic, MenuPutReq p) {
+
         if (pic == null) {
             return mapper.updateMenuInfo(p);
         }
