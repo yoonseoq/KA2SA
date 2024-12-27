@@ -33,6 +33,7 @@ public class UserController {
     }
 
     @GetMapping("check-mail")
+    @Operation(summary = "이메일 중복체크")
     public ResultResponse<Integer> checkMail(@RequestParam("mail") String mail){
         int result=service.getEmailCheck(mail);
 
@@ -41,4 +42,38 @@ public class UserController {
                .resultData(result)
                .build();
     }
+
+    @PostMapping("sign-in")
+    @Operation(summary = "로그인")
+    public ResultResponse<UserSignInRes> getUserSignIn(UserSignInReq p){
+        UserSignInRes res = service.postUserSignIn(p);
+        return ResultResponse.<UserSignInRes>builder()
+                .resultMessage("로그인 성공^^")
+                .resultData(res)
+                .build();
+    }
+
+    @GetMapping("info")
+    @Operation(summary = "회원정보 조회")
+    public ResultResponse<UserInfoGetRes> getUserInfoByUserId(long userId){
+        UserInfoGetRes res = service.getUserInfo(userId);
+        return ResultResponse.<UserInfoGetRes>builder()
+                .resultMessage(res == null? "없는 회원정보입니다.": "회원정보 조회완")
+                .resultData(res)
+                .build();
+    }
+
+
+    @PutMapping("info")
+    public ResultResponse<Integer> updateUserInfo(UserInfoPutReq p){
+       UserInfoPutDto dto = mapper.update;
+
+        int result = service.putUserInfo(p);
+
+        return ResultResponse.<Integer>builder()
+                .resultMessage("정보가 수정 되었습니다")
+                .resultData(result)
+                .build();
+    }
+
 }

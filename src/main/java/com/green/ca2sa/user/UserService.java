@@ -1,7 +1,6 @@
 package com.green.ca2sa.user;
 
-import com.green.ca2sa.user.model.UserSignUpEmailCheckRes;
-import com.green.ca2sa.user.model.UserSignUpReq;
+import com.green.ca2sa.user.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
@@ -29,6 +28,30 @@ public class UserService {
            return 1;
        }
        return 0;
+   }
+
+   public UserSignInRes postUserSignIn(UserSignInReq p) {
+       UserSignInRes res = mapper.postUserSingIn(p);
+       if (res == null){
+           res = new UserSignInRes();
+           res.setMessage("이메일을 확인하세요");
+
+           return res;
+       } else if (res.getUpw() == null) {
+           res = new UserSignInRes();
+           res.setMessage("비밀번호를 확인하세요");
+
+           return res;
+       }
+       return res;
+   }
+
+   public UserInfoGetRes getUserInfo(long userId) {
+       mapper.updateCheckUpwInfo(postUserSignUp())
+
+
+
+       return mapper.getUserInfo(userId);
    }
 
 }

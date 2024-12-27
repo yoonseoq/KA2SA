@@ -9,11 +9,12 @@ import java.util.List;
 public interface UserMapper {
     int postUserSignUp(UserSignUpReq p);
     UserSignUpEmailCheckRes getUserEmailCheck(String email);
-    /*
-
-    UserSingInRes postUserSingIn(UserSignInReq p);
+    UserSignInRes postUserSingIn(UserSignInReq p);
     UserInfoGetRes getUserInfo(long userId);
     int updateUserInfo(UserInfoPutReq p);
+    UserInfoPutDto updateCheckUpwInfo(UserInfoPutReq p);
+    /*
+
     int deleteUserInfo(long userId);
     List<UserCafeInfoGetRes> getUserCafeInfo();
 
