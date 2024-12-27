@@ -3,55 +3,44 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="com.green.ca2sa.user.UserMapper">
-    <insert id="postUserSignUp">
-        INSERT INTO user
-        SET  email=#{email}
-            ,upw=#{upw}
-            ,nickName=#{nickName}
-            ,agree=#{agree}
+    <insert id="postUserSignUp"> <!--회원가입-->
+        insert into user
+        set email = #{email}
+            , upw = #{upw}
+            , nickName = #{nickName}
+            , agree = #{agree}
     </insert>
 
-    <select id="getUserEmailCheck">
-        SELECT email
-        FROM user
-        WHERE email=#{email}
+    <select id="getUserEmailCheck"> <!--메일중복체크-->
+        select email
+        from user
+        where email = #{email}
     </select>
 
-    <select id="postUserSingIn">
-        SELECT email,upw,userId,nickName
-        FROM user
-        WHERE email=#{email}
+    <select id="postUserSignIn"> <!--로그인-->
+        select email, upw, userId, nickName
+        from user
+        where email = #{email}
     </select>
 
-    <select id="getUserInfo">
-        SELECT nickName,email
-        FROM user
-        WHERE userId=#{userId}
-    </select>
-    
-    <update id="updateUserInfo">
-        UPDATE user
-        SET  email=#{email}
-            ,nickName=#{nickName}
-            ,upw=#{upw}
-        WHERE userId=#{userId}
-    </update>
-
-    <delete id="deleteUserInfo">
-        DELETE
-        FROM user
-        WHERE userId=#{userId}
-    </delete>
-
-    <select id="getUserCafeInfo">
-        SELECT cafeId,cafeName,cafePic,location
-        FROM cafe
+    <select id="getUserInfo"> <!--유저 정보 조회-->
+        select email, nickName,
+        from user
+        where userId = #{userId}
     </select>
 
+    <select id="updateCheckUpwInfo"> <!--유저 정보 변경전 본인확인-->
+        select upw
+        from user
+        where #{userId}=#{userId}
+    </select>
 
-
+    <select id="updateUserInfo">
+        update user
+        set nickName = #{nickName}
+        where userId = #{userId}
+    </select>
 
 
 </mapper>
