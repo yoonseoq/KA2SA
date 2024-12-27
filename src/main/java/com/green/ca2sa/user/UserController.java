@@ -65,13 +65,11 @@ public class UserController {
 
 
     @PutMapping("info")
-    public ResultResponse<Integer> updateUserInfo(UserInfoPutReq p){
-       UserInfoPutDto dto = mapper.update;
+    public ResultResponse<Integer> updateUserInfo(@RequestBody UserInfoPutReq p){
+       int result = service.updateUserInfo(p);
 
-        int result = service.putUserInfo(p);
-
-        return ResultResponse.<Integer>builder()
-                .resultMessage("정보가 수정 되었습니다")
+       return ResultResponse.<Integer>builder()
+                .resultMessage(result == 0?"응 빠꾸~~": "회원정보 수정 완")
                 .resultData(result)
                 .build();
     }

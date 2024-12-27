@@ -47,11 +47,20 @@ public class UserService {
    }
 
    public UserInfoGetRes getUserInfo(long userId) {
-       mapper.updateCheckUpwInfo(postUserSignUp())
-
 
 
        return mapper.getUserInfo(userId);
+   }
+
+   public int updateUserInfo(UserInfoPutReq p){
+
+       UserInfoPutDto dto = mapper.updateCheckUpwInfo(p);
+
+       if (!BCrypt.checkpw(p.getUpw(),dto.getUpw())){
+           return 0; // 빠꾸먹으면 0으로 전환
+       }
+
+       return mapper.updateUserInfo(p);
    }
 
 }
