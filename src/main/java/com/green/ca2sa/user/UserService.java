@@ -47,9 +47,9 @@ public class UserService {
    }
 
    public UserInfoGetRes getUserInfo(long userId) {
+       UserInfoGetRes res = mapper.getUserInfo(userId);
 
-
-       return mapper.getUserInfo(userId);
+       return res;
    }
 
    public int updateUserInfo(UserInfoPutReq p){
@@ -60,7 +60,15 @@ public class UserService {
            return 0; // 빠꾸먹으면 0으로 전환
        }
 
-       return mapper.updateUserInfo(p);
+
+       int result = mapper.updateUserInfo(p);
+
+       return result;
+   }
+
+   public int deleteUserInfo(long userId) {
+       int result = mapper.deleteUserInfo(userId);
+       return result;
    }
 
 }

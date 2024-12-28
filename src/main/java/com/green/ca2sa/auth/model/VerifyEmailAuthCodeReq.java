@@ -15,7 +15,9 @@ public class VerifyEmailAuthCodeReq {
     @Email(message = "이메일 형식이 다릅니다")
     @Schema(title = "인증받을 이메일", requiredMode = Schema.RequiredMode.REQUIRED)
     private String email;
+
     @NotNull
-    @Schema(title = "인증번호", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "인증 번호", requiredMode = Schema.RequiredMode.REQUIRED)
     private String code;
+
 }

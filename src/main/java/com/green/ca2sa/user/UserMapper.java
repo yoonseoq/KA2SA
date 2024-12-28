@@ -13,6 +13,7 @@ public interface UserMapper {
     UserInfoGetRes getUserInfo(long userId);
     int updateUserInfo(UserInfoPutReq p);
     UserInfoPutDto updateCheckUpwInfo(UserInfoPutReq p);
+    int deleteUserInfo(long userId);
     /*
 
     int deleteUserInfo(long userId);

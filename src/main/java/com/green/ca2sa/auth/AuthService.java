@@ -1,6 +1,7 @@
 package com.green.ca2sa.auth;
 
 import com.green.ca2sa.auth.model.AuthCodeDto;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
@@ -18,30 +19,30 @@ import java.util.Map;
 @Service
 @AllArgsConstructor
 public class AuthService {
-    private final JavaMailSender javaMailSender;
+    private final JavaMailSender mailSender;
     private final TemplateEngine templateEngine;
 
     public boolean sendCodeToEmail(String to, String subject, AuthCodeDto authCodeDto) {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper;
         try {
-            helper = new MimeMessageHelper(mimeMessage, true);
+            helper = new MimeMessageHelper(mimeMessage,true);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(getHtmlTemplate(authCodeDto), true);
-            javaMailSender.send(mimeMessage);
+            helper.setText(getHtmlTemplate(authCodeDto),true);
+            mailSender.send(mimeMessage);
             return true;
-        } catch (MessagingException e) {
+        } catch (MessagingException e){
             log.error(e.getMessage());
             return false;
         }
     }
 
     private String getHtmlTemplate(AuthCodeDto authCodeDto) {
-        return templateEngine.process("emailTemplate", getContext(authCodeDto));
+        return templateEngine.process("emailTemplate",getConText(authCodeDto));
     }
 
-    private Context getContext(AuthCodeDto authCodeDto) {
+    private Context getConText(AuthCodeDto authCodeDto) {
         Map<String, Object> dto = new HashMap<>(2);
         dto.put("authCode", authCodeDto.getAuthCode());
         dto.put("maxDate", authCodeDto.getMaxDate());

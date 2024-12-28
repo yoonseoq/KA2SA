@@ -13,6 +13,6 @@ import lombok.ToString;
 public class SendEmailAuthCodeReq {
     @NotNull
     @Email(message = "이메일 형식이 다릅니다")
-    @Schema(title = "인증 받을 이메일", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "인증 받을 이메일",requiredMode = Schema.RequiredMode.REQUIRED)
     private String email;
 }

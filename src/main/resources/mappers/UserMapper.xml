@@ -33,14 +33,19 @@
     <select id="updateCheckUpwInfo"> <!--유저 정보 변경전 본인확인-->
         select upw
         from user
-        where #{userId}=#{userId}
+        where userId=#{userId}
     </select>
 
-    <select id="updateUserInfo">
+    <update id="updateUserInfo"> <!--유저 정보 변경-->
         update user
         set nickName = #{nickName}
         where userId = #{userId}
-    </select>
+    </update>
+
+    <delete id="deleteUserInfo">
+        delete from user
+        where userId = #{userId}
+    </delete>
 
 
 </mapper>

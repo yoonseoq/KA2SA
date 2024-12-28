@@ -65,11 +65,22 @@ public class UserController {
 
 
     @PutMapping("info")
+    @Operation(summary = "회원정보 변경")
     public ResultResponse<Integer> updateUserInfo(@RequestBody UserInfoPutReq p){
        int result = service.updateUserInfo(p);
 
        return ResultResponse.<Integer>builder()
-                .resultMessage(result == 0?"응 빠꾸~~": "회원정보 수정 완")
+                .resultMessage(result == 0?"비밀번호를 다시 입력해 주세요": "회원정보 수정 완")
+                .resultData(result)
+                .build();
+    }
+
+    @DeleteMapping
+    @Operation(summary = "회원 탈퇴")
+    public ResultResponse<Integer> deleteUserInfo(long userId){
+        int result = service.deleteUserInfo(userId);
+        return ResultResponse.<Integer>builder()
+                .resultMessage("회원 탈퇴 완료")
                 .resultData(result)
                 .build();
     }
