@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class AuthCodeDto {
-    private String authCode;
-    private String maxDate;
+    private String authCode; // 인증코드
+    private String maxDate; // 만료시간
 }

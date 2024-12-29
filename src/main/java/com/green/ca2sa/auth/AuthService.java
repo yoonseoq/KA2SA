@@ -23,7 +23,8 @@ public class AuthService {
     private final TemplateEngine templateEngine;
 
     public boolean sendCodeToEmail(String to, String subject, AuthCodeDto authCodeDto) {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
+                                // 이메일 수신자 주소, 이메일 제목, 인증코드 및 만료시간 정보
+        MimeMessage mimeMessage = mailSender.createMimeMessage(); // 이메일 메세지 객체
         MimeMessageHelper helper;
         try {
             helper = new MimeMessageHelper(mimeMessage,true);
