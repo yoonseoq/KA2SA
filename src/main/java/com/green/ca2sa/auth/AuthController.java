@@ -2,6 +2,7 @@ package com.green.ca2sa.auth;
 
 import com.green.ca2sa.auth.model.AuthCodeDto;
 import com.green.ca2sa.auth.model.SendEmailAuthCodeReq;
+import com.green.ca2sa.auth.model.VerifyEmailAuthCodeReq;
 import com.green.ca2sa.common.model.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,6 +32,14 @@ public class AuthController {
                 .resultMessage(String.format("전송 %s", result? "성공":"실패"))
                 .resultData(result)
                 .build();
+    }
+
+    @PostMapping("verify-code")
+    @Operation(description = "이메일 인증 코드 검사")
+    public ResultResponse<Boolean> postVerifyCode(@Valid @RequestBody VerifyEmailAuthCodeReq p){
+        boolean result = authCodeService.validateAuthCode(p);
+        return ResultResponse.<Boolean>builder()
+                .resultMessage(String.format("인증 %s",result? "성공": "실패!")).resultData(result).build();
     }
 
 
