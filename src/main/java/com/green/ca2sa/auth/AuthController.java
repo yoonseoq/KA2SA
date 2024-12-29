@@ -27,11 +27,19 @@ public class AuthController {
     @Operation(summary = "이메일 인증 코드 발송")
     public ResultResponse<Boolean> postSendCode(@Valid @RequestBody SendEmailAuthCodeReq p){
         AuthCodeDto authCodeDto = authCodeService.generateAuthCode(p);
-        boolean result = authService.sendCodeToEmail(p.getEmail(),"KA2SA 이메일 인증코드 안내", authCodeDto);
-        return ResultResponse.<Boolean>builder()
-                .resultMessage(String.format("전송 %s", result? "성공":"실패"))
-                .resultData(result)
-                .build();
+        try {
+            boolean result = authService.sendCodeToEmail(p.getEmail(), "KA2SA 이메일 인증코드 안내", authCodeDto);
+            return ResultResponse.<Boolean>builder()
+                    .resultMessage(String.format("전송 %s", result ? "성공" : "실패"))
+                    .resultData(result)
+                    .build();
+        } catch (Exception e) {
+            log.error("이메일 전송 중 오류발생" , e);
+            return ResultResponse.<Boolean>builder()
+                    .resultMessage("전송 失敗"+ e.getMessage())
+                    .resultData(false)
+                    .build();
+        }
     }
 
     @PostMapping("verify-code")

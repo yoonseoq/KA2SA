@@ -18,7 +18,7 @@ public class OrderPostReq {
 
     @Schema(title = "픽업 시간", example = "00:00:00", requiredMode = Schema.RequiredMode.REQUIRED)
     private String pickUpTime;
-    @Schema(title = "요청사항", example = "저희아이가 먹을거라서요 @@낭낭하게 챙겨주세요", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "요청사항", example = "저희아이가 먹을거라서요 @@낭낭하게 챙겨주세요")
     private String memo;
     @Schema(title = "소비자 아이디", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private long userId;
