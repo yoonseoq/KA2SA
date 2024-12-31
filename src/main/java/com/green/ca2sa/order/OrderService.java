@@ -29,9 +29,10 @@ public class OrderService {
         log.info("OrderPostReq:{}", p);
         int result = orderMapper.insOrder(p);
         // xml 에 foreach 문 사용해서 올리기
+        // api application programming interface 소프트웨어 프로그램간에 데이터를 전송할수 있게 하는 규칙집합
         List<OrderMenuPostReq> menuList = p.getMenuList().stream()
                 .peek(item -> item.setOrderId(p.getOrderId())) //오더 아이디 다 집어 넣어주는거 그냥 for문 돌리면서 값 넣어주는거로 보면 된다
-                .toList();
+                .toList(); // 최송적으로 스트림을 List<OrderMenuPostReq>로 반환하여 menulist에 저장
         List<OrderMenuOptionPostReq> optionList = new LinkedList<>();
 
         int result2 = orderMenuMapper.insOrderMenu(menuList);

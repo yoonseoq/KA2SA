@@ -68,7 +68,7 @@
             on a.userId = b.userId
         inner join `cafe` c
             on c.cafeId = a.cafeId
-        left join `order_menu` d
+        left join `order_menu`
             on a.orderId = d.orderId
         INNER join `menu` e
             on d.menuId = e.menuId
